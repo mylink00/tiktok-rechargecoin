@@ -1,7 +1,15 @@
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
 
+
+/* =========================================================
+   BODY
+========================================================= */
 
 body {
     margin: 0;
@@ -18,6 +26,10 @@ body {
 }
 
 
+/* =========================================================
+   PAGE
+========================================================= */
+
 .page {
     min-height: 100vh;
 
@@ -30,6 +42,10 @@ body {
     padding: 40px 20px;
 }
 
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
 
 .card {
     position: relative;
@@ -49,26 +65,9 @@ body {
 }
 
 
-/* =========================
-   PROTOTYPE
-========================= */
-
-.prototype-label {
-    position: absolute;
-
-    top: 20px;
-
-    right: 25px;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    color: #777;
-
-    letter-spacing: 1px;
-}
-
+/* =========================================================
+   TITLE
+========================================================= */
 
 h1 {
     margin: 0;
@@ -76,8 +75,14 @@ h1 {
     text-align: center;
 
     font-size: 30px;
+
+    font-weight: 700;
 }
 
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
 
 .subtitle {
     margin: 12px 0 30px;
@@ -90,9 +95,9 @@ h1 {
 }
 
 
-/* =========================
-   USERNAME
-========================= */
+/* =========================================================
+   USERNAME BOX
+========================================================= */
 
 .username-box {
     width: 100%;
@@ -113,9 +118,13 @@ h1 {
 
     margin-bottom: 20px;
 
-    background: white;
+    background: #ffffff;
 }
 
+
+/* =========================================================
+   TIKTOK LOGO
+========================================================= */
 
 .tiktok-logo {
     width: 30px;
@@ -128,6 +137,10 @@ h1 {
 }
 
 
+/* =========================================================
+   USERNAME INPUT
+========================================================= */
+
 #username {
     flex: 1;
 
@@ -138,6 +151,8 @@ h1 {
     font-size: 16px;
 
     min-width: 0;
+
+    background: transparent;
 }
 
 
@@ -145,6 +160,10 @@ h1 {
     color: #999;
 }
 
+
+/* =========================================================
+   USERNAME STATUS
+========================================================= */
 
 .username-status {
     width: 25px;
@@ -162,26 +181,28 @@ h1 {
     font-size: 15px;
 
     font-weight: bold;
+
+    flex-shrink: 0;
 }
 
 
 .username-status.valid {
     background: #20bf55;
 
-    color: white;
+    color: #ffffff;
 }
 
 
 .username-status.invalid {
     background: #ff3040;
 
-    color: white;
+    color: #ffffff;
 }
 
 
-/* =========================
-   COINS
-========================= */
+/* =========================================================
+   COIN GRID
+========================================================= */
 
 .coin-grid {
     display: grid;
@@ -193,10 +214,16 @@ h1 {
 }
 
 
+/* =========================================================
+   COIN CARD
+========================================================= */
+
 .coin-card {
     min-height: 125px;
 
-    background: white;
+    padding: 12px;
+
+    background: #ffffff;
 
     border: 2px solid #ddd;
 
@@ -216,7 +243,8 @@ h1 {
 
     transition:
         border-color 0.15s ease,
-        transform 0.15s ease;
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
 
@@ -229,8 +257,15 @@ h1 {
 
 .coin-card.selected {
     border-color: #ff0050;
+
+    box-shadow:
+        0 0 0 1px #ff0050;
 }
 
+
+/* =========================================================
+   TIKTOK COIN IMAGE
+========================================================= */
 
 .coin-logo {
     width: 38px;
@@ -238,18 +273,32 @@ h1 {
     height: 38px;
 
     object-fit: contain;
+
+    display: block;
 }
 
+
+/* =========================================================
+   COIN NUMBER
+========================================================= */
 
 .coin-card strong {
     font-size: 18px;
+
+    line-height: 1.2;
 }
 
+
+/* =========================================================
+   COIN PRICE
+========================================================= */
 
 .coin-card span {
     font-size: 14px;
 
     color: #555;
+
+    line-height: 1.2;
 }
 
 
@@ -260,9 +309,9 @@ h1 {
 }
 
 
-/* =========================
-   CUSTOM
-========================= */
+/* =========================================================
+   CUSTOM COIN
+========================================================= */
 
 .custom-section {
     margin-top: 16px;
@@ -301,6 +350,11 @@ h1 {
 }
 
 
+.custom-section input:focus {
+    border-color: #999;
+}
+
+
 .custom-price {
     margin-top: 8px;
 
@@ -308,25 +362,31 @@ h1 {
 }
 
 
+/* =========================================================
+   HIDDEN
+========================================================= */
+
 .hidden {
     display: none !important;
 }
 
 
-/* =========================
-   PAYMENT
-========================= */
+/* =========================================================
+   PAYMENT TITLE
+========================================================= */
 
 h2 {
-    margin:
-
-        30px 0 16px;
+    margin: 30px 0 16px;
 
     text-align: center;
 
     font-size: 20px;
 }
 
+
+/* =========================================================
+   PAYMENT GRID
+========================================================= */
 
 .payment-grid {
     display: flex;
@@ -341,10 +401,16 @@ h2 {
 }
 
 
+/* =========================================================
+   PAYMENT CARD
+========================================================= */
+
 .payment-card {
     width: 145px;
 
     height: 58px;
+
+    padding: 10px;
 
     display: flex;
 
@@ -352,7 +418,7 @@ h2 {
 
     justify-content: center;
 
-    background: white;
+    background: #ffffff;
 
     border: 2px solid #ddd;
 
@@ -362,36 +428,55 @@ h2 {
 
     transition:
         border-color 0.15s ease,
-        transform 0.15s ease;
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
 
 .payment-card:hover {
     transform: translateY(-2px);
+
+    border-color: #aaa;
 }
 
 
 .payment-card.selected {
     border-color: #ff0050;
+
+    box-shadow:
+        0 0 0 1px #ff0050;
 }
 
 
-.payment-card img {
-    max-width: 90px;
+/* =========================================================
+   PAYMENT LOGOS
+========================================================= */
 
-    max-height: 32px;
+.payment-card img {
+    max-width: 95px;
+
+    max-height: 34px;
 
     width: auto;
 
     height: auto;
 
     object-fit: contain;
+
+    display: block;
 }
 
 
-/* =========================
-   BOTTOM
-========================= */
+/*
+   Important:
+   Không có text Visa / MasterCard / PayPal / JCB
+   bên cạnh logo.
+*/
+
+
+/* =========================================================
+   BOTTOM AREA
+========================================================= */
 
 .bottom-area {
     display: flex;
@@ -411,12 +496,16 @@ h2 {
 }
 
 
+/* =========================================================
+   CONFIRM BUTTON
+========================================================= */
+
 .confirm-button {
     border: none;
 
     background: #ff0050;
 
-    color: white;
+    color: #ffffff;
 
     font-size: 16px;
 
@@ -427,11 +516,21 @@ h2 {
     border-radius: 12px;
 
     cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease,
+        opacity 0.15s ease;
 }
 
 
 .confirm-button:hover {
     background: #e90049;
+}
+
+
+.confirm-button:active {
+    transform: scale(0.97);
 }
 
 
@@ -442,16 +541,17 @@ h2 {
 }
 
 
-/* =========================
-   LOADING
-========================= */
+/* =========================================================
+   LOADING OVERLAY
+========================================================= */
 
 .loading-overlay {
     position: fixed;
 
     inset: 0;
 
-    background: rgba(255, 255, 255, 0.75);
+    background:
+        rgba(255, 255, 255, 0.75);
 
     display: flex;
 
@@ -462,6 +562,10 @@ h2 {
     z-index: 1000;
 }
 
+
+/* =========================================================
+   LOADER
+========================================================= */
 
 .loader {
     width: 35px;
@@ -474,7 +578,8 @@ h2 {
 
     border-radius: 50%;
 
-    animation: spin 0.8s linear infinite;
+    animation:
+        spin 0.8s linear infinite;
 }
 
 
@@ -487,19 +592,23 @@ h2 {
 }
 
 
-/* =========================================
-   SUCCESS MODAL
-   ========================================= */
+/* =========================================================
+   SUCCESS MODAL OVERLAY
+========================================================= */
 
 .modal-overlay {
     position: fixed;
+
     inset: 0;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    background: rgba(0, 0, 0, 0.40);
+    background:
+        rgba(0, 0, 0, 0.40);
 
     z-index: 9999;
 
@@ -507,22 +616,15 @@ h2 {
 }
 
 
-/* =========================================
-   HIDE
-   ========================================= */
-
-.hidden {
-    display: none !important;
-}
-
-
-/* =========================================
-   MODAL BOX
-   ========================================= */
+/* =========================================================
+   SUCCESS MODAL
+========================================================= */
 
 .success-modal {
     width: 550px;
-    max-width: calc(100vw - 40px);
+
+    max-width:
+        calc(100vw - 40px);
 
     min-height: 545px;
 
@@ -530,76 +632,217 @@ h2 {
 
     border-radius: 4px;
 
-    padding: 42px 32px 28px;
-
-    box-sizing: border-box;
+    padding:
+        42px 32px 28px;
 
     text-align: center;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    box-shadow:
+        0 8px 30px
+        rgba(0, 0, 0, 0.12);
 
-    animation: successModalIn 0.20s ease-out;
+    animation:
+        successModalIn
+        0.20s
+        ease-out;
 }
 
 
-/* =========================================
-   MODAL ANIMATION
-   ========================================= */
+/* =========================================================
+   MODAL APPEAR
+========================================================= */
 
 @keyframes successModalIn {
 
     from {
         opacity: 0;
-        transform: scale(0.96);
+
+        transform:
+            scale(0.96);
     }
 
     to {
         opacity: 1;
-        transform: scale(1);
+
+        transform:
+            scale(1);
     }
 
 }
 
 
-/* =========================================
-   SUCCESS CHECK
-   ========================================= */
+/* =========================================================
+   SUCCESS CHECK CIRCLE
+========================================================= */
 
 .success-icon {
     width: 92px;
+
     height: 92px;
 
     border-radius: 50%;
 
-    border: 5px solid #dff1d5;
+    border:
+        5px solid #dff1d5;
 
     color: #9bdd7a;
 
-    font-size: 62px;
-    font-weight: 300;
+    display: flex;
 
-    line-height: 82px;
+    align-items: center;
 
-    text-align: center;
+    justify-content: center;
 
     margin-bottom: 38px;
 
     box-sizing: border-box;
+
+    position: relative;
 }
 
 
-/* =========================================
-   TITLE
-   ========================================= */
+/* =========================================================
+   CHECK MARK
+========================================================= */
+
+.success-icon span {
+    display: block;
+
+    font-size: 62px;
+
+    font-weight: 300;
+
+    line-height: 1;
+
+    opacity: 0;
+
+    transform:
+        scale(0.4)
+        rotate(-20deg);
+
+    transform-origin: center;
+
+}
+
+
+/* =========================================================
+   CHECK ANIMATION
+========================================================= */
+
+.success-icon.animate span {
+
+    animation:
+        checkMarkIn
+        0.65s
+        cubic-bezier(
+            0.34,
+            1.56,
+            0.64,
+            1
+        )
+        forwards;
+
+}
+
+
+@keyframes checkMarkIn {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(0.3)
+            rotate(-25deg);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.15)
+            rotate(5deg);
+
+    }
+
+    75% {
+
+        transform:
+            scale(0.95)
+            rotate(0deg);
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   CHECK CIRCLE ANIMATION
+========================================================= */
+
+.success-icon.animate {
+
+    animation:
+        successCirclePulse
+        0.65s
+        ease-out;
+}
+
+
+@keyframes successCirclePulse {
+
+    0% {
+
+        transform:
+            scale(0.85);
+
+    }
+
+    55% {
+
+        transform:
+            scale(1.08);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   SUCCESS TITLE
+========================================================= */
 
 .success-title {
-    margin: 0 0 38px;
+    margin:
+        0 0 38px;
 
     font-size: 34px;
+
     font-weight: 400;
 
     color: #555555;
@@ -608,69 +851,81 @@ h2 {
 }
 
 
-/* =========================================
-   MAIN MESSAGE
-   ========================================= */
+/* =========================================================
+   SUCCESS MESSAGE
+========================================================= */
 
 .success-message {
-    margin: 0 0 25px;
+    margin:
+        0 0 25px;
 
     font-size: 20px;
+
     line-height: 1.5;
 
     color: #666666;
 }
 
+
 .success-message strong {
     color: #555555;
+
     font-weight: 700;
 }
 
 
-/* =========================================
-   INFORMATION LINES
-   ========================================= */
+/* =========================================================
+   SUCCESS INFORMATION
+========================================================= */
 
 .success-info {
-    margin: 0 0 22px;
+    margin:
+        0 0 22px;
 
     font-size: 20px;
+
     line-height: 1.4;
 
     color: #666666;
 }
 
+
 .success-info strong {
     color: #555555;
+
     font-weight: 700;
 }
 
 
-/* =========================================
-   PROCESSING MESSAGE
-   ========================================= */
+/* =========================================================
+   PROCESSING TEXT
+========================================================= */
 
 .processing-text {
     max-width: 470px;
 
-    margin: 0 auto 45px;
+    margin:
+        0 auto 45px;
 
     font-size: 16px;
+
     line-height: 1.45;
 
     color: #777777;
 }
 
 
-/* =========================================
+/* =========================================================
    OK BUTTON
-   ========================================= */
+========================================================= */
 
 .ok-button {
     width: 62px;
+
     height: 42px;
 
     border: none;
+
     border-radius: 4px;
 
     background: #16a34a;
@@ -678,6 +933,7 @@ h2 {
     color: #ffffff;
 
     font-size: 16px;
+
     font-weight: 500;
 
     cursor: pointer;
@@ -687,51 +943,181 @@ h2 {
         transform 0.15s ease;
 }
 
+
 .ok-button:hover {
     background: #12843c;
 }
 
+
 .ok-button:active {
-    transform: scale(0.97);
+    transform:
+        scale(0.97);
 }
 
 
-/* =========================================
+/* =========================================================
    MOBILE
-   ========================================= */
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .coin-grid {
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .coin-grid {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+
+    .card {
+
+        padding: 25px;
+
+    }
+
+}
+
 
 @media (max-width: 600px) {
 
-    .success-modal {
+    .page {
+
+        padding:
+            20px 12px;
+
+    }
+
+
+    .card {
+
+        padding: 22px 16px;
+
+        border-radius: 16px;
+
+    }
+
+
+    h1 {
+
+        font-size: 26px;
+
+    }
+
+
+    .coin-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+
+    }
+
+
+    .coin-card {
+
+        min-height: 115px;
+
+    }
+
+
+    .payment-card {
+
+        width: 120px;
+
+    }
+
+
+    .bottom-area {
+
+        flex-direction: column;
+
+        gap: 20px;
+
+        align-items: stretch;
+
+    }
+
+
+    .total {
+
+        text-align: center;
+
+    }
+
+
+    .confirm-button {
+
         width: 100%;
+
+    }
+
+
+    .success-modal {
+
+        width: 100%;
+
         min-height: auto;
 
-        padding: 32px 22px 25px;
+        padding:
+            32px 22px 25px;
+
     }
+
 
     .success-icon {
+
         width: 78px;
+
         height: 78px;
 
-        font-size: 52px;
-        line-height: 68px;
-
         margin-bottom: 28px;
+
     }
+
+
+    .success-icon span {
+
+        font-size: 52px;
+
+    }
+
 
     .success-title {
+
         font-size: 26px;
+
         margin-bottom: 28px;
+
     }
+
 
     .success-message,
     .success-info {
+
         font-size: 17px;
+
     }
 
+
     .processing-text {
+
         font-size: 14px;
+
         margin-bottom: 30px;
+
     }
 
 }
