@@ -4,47 +4,58 @@ const usernameInput =
 const usernameStatus =
     document.getElementById("username-status");
 
+
 const coinCards =
     document.querySelectorAll(".coin-card");
 
-const customCard =
-    document.getElementById("custom-card");
-
-const customSection =
-    document.getElementById("custom-section");
-
-const customCoinsInput =
-    document.getElementById("custom-coins");
-
-const customPrice =
-    document.getElementById("custom-price");
 
 const paymentCards =
     document.querySelectorAll(".payment-card");
 
+
+const customCard =
+    document.getElementById("custom-card");
+
+
+const customSection =
+    document.getElementById("custom-section");
+
+
+const customCoinsInput =
+    document.getElementById("custom-coins");
+
+
+const customPrice =
+    document.getElementById("custom-price");
+
+
 const totalCoins =
     document.getElementById("total-coins");
+
 
 const confirmButton =
     document.getElementById("confirm-button");
 
+
 const loadingOverlay =
     document.getElementById("loading-overlay");
+
 
 const successOverlay =
     document.getElementById("success-overlay");
 
+
 const closeModal =
     document.getElementById("close-modal");
+
 
 const modalCoins =
     document.getElementById("modal-coins");
 
-const modalUsername =
-    document.getElementById("modal-username");
 
 const modalPrice =
     document.getElementById("modal-price");
+
 
 const modalPayment =
     document.getElementById("modal-payment");
@@ -56,6 +67,8 @@ let selectedPrice = 0;
 
 let selectedPayment = "";
 
+let isCustom = false;
+
 
 /* =========================
    USERNAME VALIDATION
@@ -65,49 +78,40 @@ usernameInput.addEventListener(
     "input",
     function () {
 
-        const username =
+        const value =
             usernameInput.value.trim();
 
 
         usernameStatus.textContent = "";
 
-        usernameStatus.classList.remove(
-            "valid",
-            "invalid"
-        );
+        usernameStatus.className =
+            "username-status";
 
 
-        if (username.length === 0) {
+        if (value.length === 0) {
             return;
         }
 
 
         /*
-         * Username phải:
-         * - ít nhất 4 ký tự
-         * - không có dấu tiếng Việt
-         * - không có khoảng trắng
+         * Only:
+         * a-z
+         * A-Z
+         * 0-9
+         * underscore
+         * period
          */
 
-        const vietnameseCharacters =
-            /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i;
-
-
-        const hasVietnamese =
-            vietnameseCharacters.test(username);
-
-
-        const hasWhitespace =
-            /\s/.test(username);
+        const validUsername =
+            /^[A-Za-z0-9_.]{4,30}$/;
 
 
         if (
-            username.length >= 4 &&
-            !hasVietnamese &&
-            !hasWhitespace
+            validUsername.test(value)
         ) {
 
-            usernameStatus.textContent = "✓";
+            usernameStatus.textContent =
+                "✓";
 
             usernameStatus.classList.add(
                 "valid"
@@ -115,7 +119,8 @@ usernameInput.addEventListener(
 
         } else {
 
-            usernameStatus.textContent = "×";
+            usernameStatus.textContent =
+                "×";
 
             usernameStatus.classList.add(
                 "invalid"
@@ -140,9 +145,11 @@ coinCards.forEach(
 
                 coinCards.forEach(
                     function (item) {
+
                         item.classList.remove(
                             "selected"
                         );
+
                     }
                 );
 
@@ -153,48 +160,51 @@ coinCards.forEach(
 
 
                 if (
-                    card.id === "custom-card"
+                    card === customCard
                 ) {
 
-                    customSection.classList.remove(
-                        "hidden"
-                    );
+                    isCustom = true;
 
                     selectedCoins = 0;
 
                     selectedPrice = 0;
 
-                    totalCoins.textContent = "0";
+                    totalCoins.textContent =
+                        "0";
+
+                    customSection.classList.remove(
+                        "hidden"
+                    );
 
                     customCoinsInput.focus();
 
-                    updateCustomPrice();
+                } else {
 
-                    return;
+                    isCustom = false;
+
+                    customSection.classList.add(
+                        "hidden"
+                    );
+
+
+                    selectedCoins =
+                        Number(
+                            card.dataset.coins
+                        );
+
+
+                    selectedPrice =
+                        Number(
+                            card.dataset.price
+                        );
+
+
+                    totalCoins.textContent =
+                        selectedCoins.toLocaleString(
+                            "en-US"
+                        );
+
                 }
-
-
-                customSection.classList.add(
-                    "hidden"
-                );
-
-
-                selectedCoins =
-                    Number(
-                        card.dataset.coins
-                    );
-
-
-                selectedPrice =
-                    Number(
-                        card.dataset.price
-                    );
-
-
-                totalCoins.textContent =
-                    selectedCoins.toLocaleString(
-                        "en-US"
-                    );
 
             }
         );
@@ -204,84 +214,73 @@ coinCards.forEach(
 
 
 /* =========================
-   CUSTOM COIN PRICE
+   CUSTOM COIN
 ========================= */
-
-
-/*
- * Giá được lấy theo tỷ lệ
- * của các package hiện tại.
- *
- * 17,500 coins = $218.17
- *
- * Tỷ lệ:
- * 218.17 / 17500
- */
-
-const COIN_PRICE_RATE =
-    218.17 / 17500;
-
-
-function updateCustomPrice() {
-
-    const amount =
-        Number(
-            customCoinsInput.value
-        );
-
-
-    if (
-        !amount ||
-        amount <= 0
-    ) {
-
-        customPrice.textContent =
-            "$0.00";
-
-        selectedCoins = 0;
-
-        selectedPrice = 0;
-
-        totalCoins.textContent =
-            "0";
-
-        return;
-    }
-
-
-    const price =
-        amount * COIN_PRICE_RATE;
-
-
-    selectedCoins =
-        Math.floor(amount);
-
-
-    selectedPrice =
-        price;
-
-
-    customPrice.textContent =
-        "$" +
-        price.toFixed(2);
-
-
-    totalCoins.textContent =
-        selectedCoins.toLocaleString(
-            "en-US"
-        );
-
-}
-
 
 customCoinsInput.addEventListener(
     "input",
-    updateCustomPrice
+    function () {
+
+        if (!isCustom) {
+            return;
+        }
+
+
+        const coins =
+            Number(
+                customCoinsInput.value
+            );
+
+
+        if (
+            !Number.isFinite(coins) ||
+            coins <= 0
+        ) {
+
+            selectedCoins = 0;
+
+            selectedPrice = 0;
+
+            totalCoins.textContent =
+                "0";
+
+            customPrice.textContent =
+                "$0.00";
+
+            return;
+
+        }
+
+
+        selectedCoins =
+            Math.floor(coins);
+
+
+        /*
+         * Prototype pricing.
+         * Approximately $0.01247 per coin.
+         */
+
+        selectedPrice =
+            selectedCoins * 0.01247;
+
+
+        customPrice.textContent =
+            "$" +
+            selectedPrice.toFixed(2);
+
+
+        totalCoins.textContent =
+            selectedCoins.toLocaleString(
+                "en-US"
+            );
+
+    }
 );
 
 
 /* =========================
-   PAYMENT SELECTION
+   PAYMENT
 ========================= */
 
 paymentCards.forEach(
@@ -329,18 +328,12 @@ confirmButton.addEventListener(
             usernameInput.value.trim();
 
 
-        /*
-         * Validate username
-         */
-
-        const vietnameseCharacters =
-            /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i;
+        const validUsername =
+            /^[A-Za-z0-9_.]{4,30}$/;
 
 
         if (
-            username.length < 4 ||
-            vietnameseCharacters.test(username) ||
-            /\s/.test(username)
+            !validUsername.test(username)
         ) {
 
             alert(
@@ -350,12 +343,9 @@ confirmButton.addEventListener(
             usernameInput.focus();
 
             return;
+
         }
 
-
-        /*
-         * Check coin
-         */
 
         if (
             selectedCoins <= 0
@@ -366,15 +356,12 @@ confirmButton.addEventListener(
             );
 
             return;
+
         }
 
 
-        /*
-         * Check payment
-         */
-
         if (
-            !selectedPayment
+            selectedPayment === ""
         ) {
 
             alert(
@@ -382,16 +369,20 @@ confirmButton.addEventListener(
             );
 
             return;
+
         }
 
 
         /*
-         * Loading ~1 second
+         * Show loading screen
          */
 
         loadingOverlay.classList.remove(
             "hidden"
         );
+
+
+        confirmButton.disabled = true;
 
 
         setTimeout(
@@ -402,18 +393,13 @@ confirmButton.addEventListener(
                 );
 
 
-                /*
-                 * Fill modal
-                 */
+                confirmButton.disabled = false;
+
 
                 modalCoins.textContent =
                     selectedCoins.toLocaleString(
                         "en-US"
                     );
-
-
-                modalUsername.textContent =
-                    "@" + username;
 
 
                 modalPrice.textContent =
@@ -428,6 +414,7 @@ confirmButton.addEventListener(
                 successOverlay.classList.remove(
                     "hidden"
                 );
+
 
             },
             1000
@@ -453,17 +440,14 @@ closeModal.addEventListener(
 );
 
 
-/*
- * Click outside modal
- */
+/* Click outside modal */
 
 successOverlay.addEventListener(
     "click",
     function (event) {
 
         if (
-            event.target ===
-            successOverlay
+            event.target === successOverlay
         ) {
 
             successOverlay.classList.add(
