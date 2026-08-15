@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Get Coins</title>
+    <title>Get Coins - Prototype</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,6 +16,11 @@
 
     <section class="card">
 
+        <!-- PROTOTYPE LABEL -->
+        <div class="prototype-label">
+            PROTOTYPE
+        </div>
+
         <h1>Get Coins</h1>
 
         <p class="subtitle">
@@ -22,13 +28,17 @@
         </p>
 
 
-        <!-- USERNAME -->
+        <!-- =========================
+             USERNAME
+        ========================== -->
 
         <div class="username-box">
 
-            <div class="tiktok-logo">
-                ♪
-            </div>
+            <img
+                class="tiktok-logo"
+                src="assets/tiktok.png"
+                alt="TikTok"
+            >
 
             <input
                 type="text"
@@ -40,13 +50,15 @@
 
             <span
                 id="username-status"
-                class="username-status"
-            ></span>
+                class="username-status">
+            </span>
 
         </div>
 
 
-        <!-- COIN PACKAGES -->
+        <!-- =========================
+             COIN PACKAGES
+        ========================== -->
 
         <div
             class="coin-grid"
@@ -54,113 +66,173 @@
         >
 
             <button
+                type="button"
                 class="coin-card"
                 data-coins="30"
                 data-price="0.38"
             >
-                <div class="coin-icon">♪</div>
+
+                <img
+                    src="assets/coin.png"
+                    alt=""
+                    class="coin-logo"
+                >
 
                 <strong>30</strong>
 
                 <span>$0.38</span>
+
             </button>
 
 
             <button
+                type="button"
                 class="coin-card"
                 data-coins="350"
                 data-price="4.36"
             >
-                <div class="coin-icon">♪</div>
+
+                <img
+                    src="assets/coin.png"
+                    alt=""
+                    class="coin-logo"
+                >
 
                 <strong>350</strong>
 
                 <span>$4.36</span>
+
             </button>
 
 
             <button
+                type="button"
                 class="coin-card"
                 data-coins="700"
                 data-price="8.73"
             >
-                <div class="coin-icon">♪</div>
+
+                <img
+                    src="assets/coin.png"
+                    alt=""
+                    class="coin-logo"
+                >
 
                 <strong>700</strong>
 
                 <span>$8.73</span>
+
             </button>
 
 
             <button
+                type="button"
                 class="coin-card"
                 data-coins="1400"
                 data-price="17.45"
             >
-                <div class="coin-icon">♪</div>
+
+                <img
+                    src="assets/coin.png"
+                    alt=""
+                    class="coin-logo"
+                >
 
                 <strong>1,400</strong>
 
                 <span>$17.45</span>
+
             </button>
 
 
             <button
+                type="button"
                 class="coin-card"
                 data-coins="3500"
                 data-price="43.63"
             >
-                <div class="coin-icon">♪</div>
+
+                <img
+                    src="assets/coin.png"
+                    alt=""
+                    class="coin-logo"
+                >
 
                 <strong>3,500</strong>
 
                 <span>$43.63</span>
+
             </button>
 
 
             <button
+                type="button"
                 class="coin-card"
                 data-coins="7000"
                 data-price="87.27"
             >
-                <div class="coin-icon">♪</div>
+
+                <img
+                    src="assets/coin.png"
+                    alt=""
+                    class="coin-logo"
+                >
 
                 <strong>7,000</strong>
 
                 <span>$87.27</span>
+
             </button>
 
 
             <button
+                type="button"
                 class="coin-card"
                 data-coins="17500"
                 data-price="218.17"
             >
-                <div class="coin-icon">♪</div>
+
+                <img
+                    src="assets/coin.png"
+                    alt=""
+                    class="coin-logo"
+                >
 
                 <strong>17,500</strong>
 
                 <span>$218.17</span>
+
             </button>
 
 
+            <!-- CUSTOM -->
+
             <button
+                type="button"
                 class="coin-card custom-card"
                 id="custom-card"
             >
-                <div class="coin-icon">♪</div>
+
+                <img
+                    src="assets/coin.png"
+                    alt=""
+                    class="coin-logo"
+                >
 
                 <strong>Custom</strong>
 
                 <span>
                     Support large quantities
                 </span>
+
             </button>
 
         </div>
 
 
-        <!-- CUSTOM COIN -->
+        <!-- =========================
+             CUSTOM COIN
+        ========================== -->
 
         <div
             id="custom-section"
@@ -189,7 +261,9 @@
         </div>
 
 
-        <!-- PAYMENT -->
+        <!-- =========================
+             PAYMENT
+        ========================== -->
 
         <h2>
             Select Payment Method
@@ -202,6 +276,7 @@
             <!-- VISA -->
 
             <button
+                type="button"
                 class="payment-card"
                 data-payment="Visa"
             >
@@ -211,14 +286,13 @@
                     alt="Visa"
                 >
 
-                <span>Visa</span>
-
             </button>
 
 
             <!-- MASTERCARD -->
 
             <button
+                type="button"
                 class="payment-card"
                 data-payment="MasterCard"
             >
@@ -228,14 +302,13 @@
                     alt="MasterCard"
                 >
 
-                <span>MasterCard</span>
-
             </button>
 
 
             <!-- PAYPAL -->
 
             <button
+                type="button"
                 class="payment-card"
                 data-payment="PayPal"
             >
@@ -245,14 +318,13 @@
                     alt="PayPal"
                 >
 
-                <span>PayPal</span>
-
             </button>
 
 
             <!-- JCB -->
 
             <button
+                type="button"
                 class="payment-card"
                 data-payment="JCB"
             >
@@ -262,14 +334,14 @@
                     alt="JCB"
                 >
 
-                <span>JCB</span>
-
             </button>
 
         </div>
 
 
-        <!-- BOTTOM -->
+        <!-- =========================
+             BOTTOM
+        ========================== -->
 
         <div class="bottom-area">
 
@@ -287,6 +359,7 @@
 
 
             <button
+                type="button"
                 id="confirm-button"
                 class="confirm-button"
             >
@@ -300,7 +373,9 @@
 </main>
 
 
-<!-- LOADING -->
+<!-- =========================
+     LOADING
+========================== -->
 
 <div
     id="loading-overlay"
@@ -312,7 +387,9 @@
 </div>
 
 
-<!-- SUCCESS -->
+<!-- =========================
+     SUCCESS
+========================== -->
 
 <div
     id="success-overlay"
@@ -326,32 +403,43 @@
         </div>
 
         <h2>
-            🎉 REQUEST SUCCESSFUL!
+            Prototype Request
         </h2>
 
         <p>
-            You have successfully requested
-            <strong id="modal-coins">0</strong>
-            coins for
-            <strong id="modal-username">@username</strong>.
+
+            Selected:
+
+            <strong id="modal-coins">
+                0
+            </strong>
+
+            coins.
+
         </p>
 
         <p>
-            💳 Amount:
-            <strong id="modal-price">$0.00</strong>
+
+            Amount:
+
+            <strong id="modal-price">
+                $0.00
+            </strong>
+
         </p>
 
         <p>
-            💳 Payment Method:
-            <strong id="modal-payment">Visa</strong>
-        </p>
 
-        <p class="processing-text">
-            ⏳ Please wait about 24–48 hours for the system
-            to process your transaction.
+            Payment method:
+
+            <strong id="modal-payment">
+                -
+            </strong>
+
         </p>
 
         <button
+            type="button"
             id="close-modal"
             class="ok-button"
         >
