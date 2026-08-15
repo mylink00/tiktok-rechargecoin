@@ -1,548 +1,446 @@
-/* =========================================
-   ELEMENTS
-========================================= */
+document.addEventListener("DOMContentLoaded", function () {
 
-const usernameInput =
-    document.getElementById("username");
+    /* =========================
+       ELEMENTS
+    ========================= */
 
-const usernameStatus =
-    document.getElementById("username-status");
+    const usernameInput =
+        document.getElementById("username");
 
-const usernameError =
-    document.getElementById("username-error");
+    const usernameStatus =
+        document.getElementById("username-status");
 
-const coinPackages =
-    document.querySelectorAll(".coin-package");
+    const coinCards =
+        document.querySelectorAll(".coin-card");
 
-const paymentMethods =
-    document.querySelectorAll(".payment-method");
+    const customCard =
+        document.getElementById("custom-card");
 
-const customPackage =
-    document.getElementById("custom-package");
+    const customSection =
+        document.getElementById("custom-section");
 
-const customSection =
-    document.getElementById("custom-section");
+    const customCoinsInput =
+        document.getElementById("custom-coins");
 
-const customCoinsInput =
-    document.getElementById("custom-coins");
+    const customPrice =
+        document.getElementById("custom-price");
 
-const customPrice =
-    document.getElementById("custom-price");
+    const paymentCards =
+        document.querySelectorAll(".payment-card");
 
-const totalCoins =
-    document.getElementById("total-coins");
+    const totalCoins =
+        document.getElementById("total-coins");
 
-const confirmButton =
-    document.getElementById("confirm-button");
+    const confirmButton =
+        document.getElementById("confirm-button");
 
-const loadingOverlay =
-    document.getElementById("loading-overlay");
+    const loadingOverlay =
+        document.getElementById("loading-overlay");
 
-const successOverlay =
-    document.getElementById("success-overlay");
+    const successOverlay =
+        document.getElementById("success-overlay");
 
-const okButton =
-    document.getElementById("ok-button");
+    const closeModal =
+        document.getElementById("close-modal");
 
-const successCoins =
-    document.getElementById("success-coins");
+    const modalCoins =
+        document.getElementById("modal-coins");
 
-const successUsername =
-    document.getElementById("success-username");
+    const modalUsername =
+        document.getElementById("modal-username");
 
-const successPrice =
-    document.getElementById("success-price");
+    const modalPrice =
+        document.getElementById("modal-price");
 
-const successPayment =
-    document.getElementById("success-payment");
-
-
-/* =========================================
-   VARIABLES
-========================================= */
-
-let selectedCoins = 0;
-let selectedPrice = 0;
-let selectedPayment = "";
+    const modalPayment =
+        document.getElementById("modal-payment");
 
 
-// Approximate rate:
-// around 80 Coins = $1
-const CUSTOM_RATE = 0.012466;
+    /* =========================
+       DATA
+    ========================= */
+
+    let selectedCoins = 0;
+
+    let selectedPrice = 0;
+
+    let selectedPayment = "";
 
 
-/* =========================================
-   LOAD SAVED TOTAL
-========================================= */
+    /*
+        Giá custom:
 
-let savedTotal =
-    Number(localStorage.getItem("demoCoinTotal")) || 0;
+        350 coins = $4.36
 
-totalCoins.textContent =
-    savedTotal.toLocaleString();
+        Đây là tỷ lệ được sử dụng
+        cho số coin nhập thủ công.
+    */
+
+    const COIN_RATE = 4.36 / 350;
 
 
-/* =========================================
-   USERNAME VALIDATION
-========================================= */
+    /* =========================
+       USERNAME VALIDATION
+    ========================= */
 
-/*
-    Rules:
+    usernameInput.addEventListener("input", function () {
 
-    1. More than 3 characters
-    2. Only English letters
-    3. Numbers allowed
-    4. "." allowed
-    5. "_" allowed
-    6. No Vietnamese accented characters
-    7. No spaces
-*/
-
-function validateUsername() {
-
-    const username =
-        usernameInput.value.trim();
-
-    // Empty
-    if (username.length === 0) {
+        const username =
+            usernameInput.value.trim();
 
         usernameStatus.className =
             "username-status";
 
         usernameStatus.textContent = "";
 
-        usernameError.textContent = "";
 
-        return false;
-    }
+        /*
+            Username hợp lệ:
 
+            - từ 4 ký tự trở lên
+            - chỉ cho phép:
+              a-z
+              A-Z
+              0-9
+              _
+              .
+        */
 
-    // More than 3 characters
-    if (username.length <= 3) {
-
-        usernameStatus.className =
-            "username-status invalid";
-
-        usernameStatus.textContent = "×";
-
-        usernameError.textContent =
-            "Username must contain more than 3 characters.";
-
-        return false;
-    }
+        const validUsername =
+            /^[a-zA-Z0-9_.]{4,}$/.test(username);
 
 
-    // Allowed characters only
-    const validPattern =
-        /^[A-Za-z0-9._]+$/;
+        if (username.length === 0) {
 
-    if (!validPattern.test(username)) {
+            return;
 
-        usernameStatus.className =
-            "username-status invalid";
-
-        usernameStatus.textContent = "×";
-
-        usernameError.textContent =
-            "Use only English letters, numbers, dots or underscores.";
-
-        return false;
-    }
+        }
 
 
-    // Valid
-    usernameStatus.className =
-        "username-status valid";
+        if (validUsername) {
 
-    usernameStatus.textContent = "✓";
+            usernameStatus.classList.add("valid");
 
-    usernameError.textContent = "";
+            usernameStatus.textContent = "✓";
 
-    return true;
-}
+        } else {
 
+            usernameStatus.classList.add("invalid");
 
-usernameInput.addEventListener(
-    "input",
-    validateUsername
-);
+            usernameStatus.textContent = "×";
 
+        }
 
-/* =========================================
-   SELECT COIN PACKAGE
-========================================= */
-
-coinPackages.forEach(packageButton => {
-
-    packageButton.addEventListener(
-        "click",
-        () => {
-
-            // Remove previous selection
-            coinPackages.forEach(item => {
-                item.classList.remove("selected");
-            });
+    });
 
 
-            // Select current package
-            packageButton.classList.add(
-                "selected"
-            );
+    /* =========================
+       COIN PACKAGE SELECTION
+    ========================= */
 
+    coinCards.forEach(function (card) {
 
-            // Custom package
-            if (
-                packageButton ===
-                customPackage
-            ) {
+        card.addEventListener("click", function () {
 
-                customSection.classList.add(
-                    "show"
-                );
+            /*
+                Nếu là Custom thì
+                xử lý riêng.
+            */
 
-                selectedCoins = 0;
-                selectedPrice = 0;
+            if (card === customCard) {
+
+                coinCards.forEach(function (item) {
+                    item.classList.remove("selected");
+                });
+
+                customCard.classList.add("selected");
+
+                customSection.classList.remove("hidden");
 
                 customCoinsInput.focus();
 
-                updateTotal();
+                updateCustomCoins();
 
                 return;
             }
 
 
-            // Normal package
-            customSection.classList.remove(
-                "show"
-            );
+            /*
+                Xóa lựa chọn cũ.
+            */
 
-            const coins =
-                Number(
-                    packageButton.dataset.coins
-                );
+            coinCards.forEach(function (item) {
+                item.classList.remove("selected");
+            });
 
-            const price =
-                Number(
-                    packageButton.dataset.price
-                );
 
-            selectedCoins = coins;
+            /*
+                Chọn package hiện tại.
+            */
 
-            selectedPrice = price;
+            card.classList.add("selected");
 
-            updateTotal();
-        }
+
+            /*
+                Ẩn Custom.
+            */
+
+            customSection.classList.add("hidden");
+
+
+            /*
+                Lấy dữ liệu từ HTML.
+            */
+
+            selectedCoins =
+                Number(card.dataset.coins);
+
+            selectedPrice =
+                Number(card.dataset.price);
+
+
+            /*
+                Cập nhật tổng.
+            */
+
+            totalCoins.textContent =
+                selectedCoins.toLocaleString("en-US");
+
+        });
+
+    });
+
+
+    /* =========================
+       CUSTOM COIN
+    ========================= */
+
+    customCoinsInput.addEventListener(
+        "input",
+        updateCustomCoins
     );
 
-});
 
-
-/* =========================================
-   CUSTOM COIN
-========================================= */
-
-customCoinsInput.addEventListener(
-    "input",
-    () => {
+    function updateCustomCoins() {
 
         let coins =
-            Number(
-                customCoinsInput.value
-            );
+            Number(customCoinsInput.value);
 
 
         if (!coins || coins < 1) {
 
             selectedCoins = 0;
+
             selectedPrice = 0;
 
-            customPrice.textContent =
-                "$0.00";
+            totalCoins.textContent = "0";
 
-            updateTotal();
+            customPrice.textContent = "$0.00";
 
             return;
         }
 
 
-        // Limit to 1,000,000 coins
-        if (coins > 1000000) {
+        /*
+            Chỉ lấy số nguyên.
+        */
 
-            coins = 1000000;
-
-            customCoinsInput.value =
-                coins;
-        }
+        coins = Math.floor(coins);
 
 
-        selectedCoins =
-            Math.floor(coins);
+        selectedCoins = coins;
+
+
+        selectedPrice =
+            coins * COIN_RATE;
 
 
         /*
-            Custom price calculation.
-
-            Example:
-
-            5,000 coins
-            × $0.012466
-            ≈ $62.33
+            Hiển thị giá.
         */
 
-        selectedPrice =
-            selectedCoins *
-            CUSTOM_RATE;
-
-
         customPrice.textContent =
-            "$" +
-            selectedPrice.toFixed(2);
+            "$" + selectedPrice.toFixed(2);
 
 
-        updateTotal();
+        totalCoins.textContent =
+            selectedCoins.toLocaleString("en-US");
+
     }
-);
 
 
-/* =========================================
-   UPDATE TOTAL
-========================================= */
+    /* =========================
+       PAYMENT SELECTION
+    ========================= */
 
-function updateTotal() {
+    paymentCards.forEach(function (card) {
 
-    totalCoins.textContent =
-        selectedCoins.toLocaleString();
-}
+        card.addEventListener("click", function () {
 
+            paymentCards.forEach(function (item) {
 
-/* =========================================
-   PAYMENT METHODS
-========================================= */
-
-paymentMethods.forEach(paymentButton => {
-
-    paymentButton.addEventListener(
-        "click",
-        () => {
-
-            paymentMethods.forEach(item => {
-
-                item.classList.remove(
-                    "selected"
-                );
+                item.classList.remove("selected");
 
             });
 
 
-            paymentButton.classList.add(
-                "selected"
-            );
+            card.classList.add("selected");
 
 
             selectedPayment =
-                paymentButton.dataset.payment;
+                card.dataset.payment;
+
+        });
+
+    });
+
+
+    /* =========================
+       CONFIRM
+    ========================= */
+
+    confirmButton.addEventListener(
+        "click",
+        function () {
+
+            const username =
+                usernameInput.value.trim();
+
+
+            /*
+                Kiểm tra username.
+            */
+
+            const validUsername =
+                /^[a-zA-Z0-9_.]{4,}$/.test(username);
+
+
+            if (!validUsername) {
+
+                alert(
+                    "Please enter a valid username."
+                );
+
+                usernameInput.focus();
+
+                return;
+            }
+
+
+            /*
+                Kiểm tra coin.
+            */
+
+            if (selectedCoins <= 0) {
+
+                alert(
+                    "Please select a coin package."
+                );
+
+                return;
+            }
+
+
+            /*
+                Kiểm tra payment.
+            */
+
+            if (!selectedPayment) {
+
+                alert(
+                    "Please select a payment method."
+                );
+
+                return;
+            }
+
+
+            /*
+                Hiện loading.
+            */
+
+            loadingOverlay.classList.remove("hidden");
+
+
+            /*
+                Chờ khoảng 1 giây.
+            */
+
+            setTimeout(function () {
+
+                loadingOverlay.classList.add("hidden");
+
+
+                /*
+                    Điền dữ liệu vào modal.
+                */
+
+                modalCoins.textContent =
+                    selectedCoins.toLocaleString("en-US");
+
+
+                modalUsername.textContent =
+                    "@" + username;
+
+
+                modalPrice.textContent =
+                    "$" + selectedPrice.toFixed(2);
+
+
+                modalPayment.textContent =
+                    selectedPayment;
+
+
+                /*
+                    Hiện modal.
+                */
+
+                successOverlay.classList.remove(
+                    "hidden"
+                );
+
+            }, 1000);
+
+        }
+    );
+
+
+    /* =========================
+       CLOSE MODAL
+    ========================= */
+
+    closeModal.addEventListener(
+        "click",
+        function () {
+
+            successOverlay.classList.add(
+                "hidden"
+            );
+
+        }
+    );
+
+
+    /*
+        Cho phép click ra ngoài
+        modal để đóng.
+    */
+
+    successOverlay.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target === successOverlay
+            ) {
+
+                successOverlay.classList.add(
+                    "hidden"
+                );
+
+            }
+
         }
     );
 
 });
-
-
-/* =========================================
-   CONFIRM
-========================================= */
-
-confirmButton.addEventListener(
-    "click",
-    () => {
-
-        const validUsername =
-            validateUsername();
-
-
-        // Username error
-        if (!validUsername) {
-
-            usernameInput.focus();
-
-            return;
-        }
-
-
-        // Coin error
-        if (selectedCoins <= 0) {
-
-            alert(
-                "Please select a Coin package."
-            );
-
-            return;
-        }
-
-
-        // Payment error
-        if (!selectedPayment) {
-
-            alert(
-                "Please select a payment method."
-            );
-
-            return;
-        }
-
-
-        /*
-            START LOADING
-        */
-
-        loadingOverlay.classList.add(
-            "show"
-        );
-
-
-        /*
-            Wait approximately 1 second
-            before showing the result.
-        */
-
-        setTimeout(
-            () => {
-
-                loadingOverlay.classList.remove(
-                    "show"
-                );
-
-
-                showSuccessModal();
-
-            },
-            1000
-        );
-
-    }
-);
-
-
-/* =========================================
-   SUCCESS MODAL
-========================================= */
-
-function showSuccessModal() {
-
-    const username =
-        usernameInput.value.trim();
-
-
-    successCoins.textContent =
-        selectedCoins.toLocaleString();
-
-
-    successUsername.textContent =
-        "@" + username;
-
-
-    successPrice.textContent =
-        "$" + selectedPrice.toFixed(2);
-
-
-    successPayment.textContent =
-        selectedPayment;
-
-
-    successOverlay.classList.add(
-        "show"
-    );
-}
-
-
-/* =========================================
-   OK BUTTON
-========================================= */
-
-okButton.addEventListener(
-    "click",
-    () => {
-
-        /*
-            Add purchased coins
-            to the simulated balance.
-        */
-
-        savedTotal += selectedCoins;
-
-
-        localStorage.setItem(
-            "demoCoinTotal",
-            savedTotal
-        );
-
-
-        totalCoins.textContent =
-            savedTotal.toLocaleString();
-
-
-        successOverlay.classList.remove(
-            "show"
-        );
-
-
-        /*
-            Reset current selection
-        */
-
-        selectedCoins = 0;
-        selectedPrice = 0;
-        selectedPayment = "";
-
-
-        coinPackages.forEach(item => {
-
-            item.classList.remove(
-                "selected"
-            );
-
-        });
-
-
-        paymentMethods.forEach(item => {
-
-            item.classList.remove(
-                "selected"
-            );
-
-        });
-
-
-        customSection.classList.remove(
-            "show"
-        );
-
-
-        customCoinsInput.value = "";
-
-        customPrice.textContent =
-            "$0.00";
-    }
-);
-
-
-/* =========================================
-   CLOSE MODAL WHEN CLICKING OUTSIDE
-========================================= */
-
-successOverlay.addEventListener(
-    "click",
-    (event) => {
-
-        if (
-            event.target ===
-            successOverlay
-        ) {
-
-            successOverlay.classList.remove(
-                "show"
-            );
-
-        }
-
-    }
-);
