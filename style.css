@@ -12,91 +12,108 @@ body {
         Helvetica,
         sans-serif;
 
-    background: #f7f7f7;
+    background: #f5f5f5;
 
     color: #111;
-
-    min-height: 100vh;
 }
 
 
-/* PAGE */
-
 .page {
-    width: 100%;
-
     min-height: 100vh;
 
     display: flex;
 
     justify-content: center;
 
-    align-items: flex-start;
+    align-items: center;
 
     padding: 40px 20px;
 }
 
 
-/* MAIN CARD */
-
 .card {
-    width: min(1060px, 100%);
+    position: relative;
 
-    background: #fff;
+    width: 100%;
+
+    max-width: 1050px;
+
+    background: #ffffff;
 
     border-radius: 20px;
 
-    padding: 32px 34px;
+    padding: 36px;
 
     box-shadow:
         0 10px 35px rgba(0, 0, 0, 0.08);
 }
 
 
-/* TITLE */
+/* =========================
+   PROTOTYPE
+========================= */
+
+.prototype-label {
+    position: absolute;
+
+    top: 20px;
+
+    right: 25px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #777;
+
+    letter-spacing: 1px;
+}
+
 
 h1 {
-    text-align: center;
-
     margin: 0;
+
+    text-align: center;
 
     font-size: 30px;
 }
 
 
 .subtitle {
+    margin: 12px 0 30px;
+
     text-align: center;
 
     color: #ff0050;
-
-    margin:
-        12px 0
-        30px;
 
     font-size: 14px;
 }
 
 
-/* USERNAME */
+/* =========================
+   USERNAME
+========================= */
 
 .username-box {
     width: 100%;
 
-    height: 56px;
-
-    border: 1px solid #d9d9d9;
-
-    border-radius: 15px;
+    height: 58px;
 
     display: flex;
 
     align-items: center;
 
+    gap: 14px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 16px;
+
     padding: 0 16px;
 
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 
-    background: #fff;
+    background: white;
 }
 
 
@@ -105,23 +122,13 @@ h1 {
 
     height: 30px;
 
-    display: flex;
+    object-fit: contain;
 
-    justify-content: center;
-
-    align-items: center;
-
-    color: #000;
-
-    font-size: 28px;
-
-    font-weight: bold;
-
-    margin-right: 12px;
+    flex-shrink: 0;
 }
 
 
-.username-box input {
+#username {
     flex: 1;
 
     border: none;
@@ -130,11 +137,11 @@ h1 {
 
     font-size: 16px;
 
-    background: transparent;
+    min-width: 0;
 }
 
 
-.username-box input::placeholder {
+#username::placeholder {
     color: #999;
 }
 
@@ -144,53 +151,56 @@ h1 {
 
     height: 25px;
 
-    border-radius: 50%;
-
     display: flex;
-
-    justify-content: center;
 
     align-items: center;
 
-    font-size: 16px;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 15px;
 
     font-weight: bold;
-
-    color: white;
 }
 
 
 .username-status.valid {
     background: #20bf55;
+
+    color: white;
 }
 
 
 .username-status.invalid {
-    background: #e53935;
+    background: #ff3040;
+
+    color: white;
 }
 
 
-/* COINS */
+/* =========================
+   COINS
+========================= */
 
 .coin-grid {
     display: grid;
 
     grid-template-columns:
-        repeat(5, minmax(0, 1fr));
+        repeat(5, 1fr);
 
     gap: 16px;
 }
 
 
 .coin-card {
-    min-height: 122px;
+    min-height: 125px;
 
-    border:
-        2px solid #dedede;
+    background: white;
 
-    border-radius: 15px;
+    border: 2px solid #ddd;
 
-    background: #fff;
+    border-radius: 16px;
 
     cursor: pointer;
 
@@ -198,57 +208,36 @@ h1 {
 
     flex-direction: column;
 
-    justify-content: center;
-
     align-items: center;
 
-    gap: 5px;
+    justify-content: center;
+
+    gap: 6px;
 
     transition:
         border-color 0.15s ease,
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
+        transform 0.15s ease;
 }
 
 
 .coin-card:hover {
     transform: translateY(-2px);
 
-    box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.08);
+    border-color: #aaa;
 }
 
 
 .coin-card.selected {
     border-color: #ff0050;
-
-    box-shadow:
-        0 0 0 1px #ff0050;
 }
 
 
-.coin-icon {
-    width: 34px;
+.coin-logo {
+    width: 38px;
 
-    height: 34px;
+    height: 38px;
 
-    border-radius: 50%;
-
-    background: #ffd629;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    color: white;
-
-    font-size: 22px;
-
-    font-weight: bold;
-
-    margin-bottom: 4px;
+    object-fit: contain;
 }
 
 
@@ -266,19 +255,23 @@ h1 {
 
 .custom-card span {
     text-align: center;
+
+    line-height: 1.25;
 }
 
 
-/* CUSTOM */
+/* =========================
+   CUSTOM
+========================= */
 
 .custom-section {
     margin-top: 16px;
 
-    padding: 16px;
+    padding: 18px;
 
     background: #f7f7f7;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
     text-align: center;
 }
@@ -296,14 +289,11 @@ h1 {
 .custom-section input {
     width: 210px;
 
-    height: 40px;
+    padding: 10px 12px;
 
-    border:
-        1px solid #d0d0d0;
+    border: 1px solid #ccc;
 
-    border-radius: 8px;
-
-    padding: 0 10px;
+    border-radius: 9px;
 
     font-size: 15px;
 
@@ -323,14 +313,16 @@ h1 {
 }
 
 
-/* PAYMENT */
+/* =========================
+   PAYMENT
+========================= */
 
 h2 {
-    text-align: center;
-
     margin:
-        24px 0
-        18px;
+
+        30px 0 16px;
+
+    text-align: center;
 
     font-size: 20px;
 }
@@ -341,7 +333,7 @@ h2 {
 
     justify-content: center;
 
-    align-items: stretch;
+    align-items: center;
 
     gap: 14px;
 
@@ -354,70 +346,61 @@ h2 {
 
     height: 58px;
 
-    background: white;
-
-    border:
-        2px solid #dedede;
-
-    border-radius: 12px;
-
-    cursor: pointer;
-
     display: flex;
-
-    justify-content: center;
 
     align-items: center;
 
-    gap: 12px;
+    justify-content: center;
+
+    background: white;
+
+    border: 2px solid #ddd;
+
+    border-radius: 14px;
+
+    cursor: pointer;
 
     transition:
         border-color 0.15s ease,
-        box-shadow 0.15s ease;
+        transform 0.15s ease;
 }
 
 
 .payment-card:hover {
-    border-color: #bbb;
+    transform: translateY(-2px);
 }
 
 
 .payment-card.selected {
     border-color: #ff0050;
-
-    box-shadow:
-        0 0 0 1px #ff0050;
 }
 
 
 .payment-card img {
-    width: 52px;
+    max-width: 90px;
 
-    height: 32px;
+    max-height: 32px;
+
+    width: auto;
+
+    height: auto;
 
     object-fit: contain;
-
-    display: block;
 }
 
 
-.payment-card span {
-    font-size: 15px;
-
-    white-space: nowrap;
-}
-
-
-/* BOTTOM */
+/* =========================
+   BOTTOM
+========================= */
 
 .bottom-area {
-    margin-top: 22px;
-
     display: flex;
 
     justify-content: space-between;
 
     align-items: center;
+
+    margin-top: 28px;
 }
 
 
@@ -439,24 +422,16 @@ h2 {
 
     font-weight: bold;
 
-    padding:
-        14px
-        34px;
+    padding: 15px 34px;
 
     border-radius: 12px;
 
     cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        opacity 0.15s ease;
 }
 
 
 .confirm-button:hover {
-    transform: translateY(-1px);
-
-    opacity: 0.92;
+    background: #e90049;
 }
 
 
@@ -464,45 +439,42 @@ h2 {
     opacity: 0.5;
 
     cursor: not-allowed;
-
-    transform: none;
 }
 
 
-/* LOADING */
+/* =========================
+   LOADING
+========================= */
 
 .loading-overlay {
     position: fixed;
 
     inset: 0;
 
-    background:
-        rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.75);
 
     display: flex;
 
-    justify-content: center;
-
     align-items: center;
 
-    z-index: 9999;
+    justify-content: center;
+
+    z-index: 1000;
 }
 
 
 .loader {
-    width: 38px;
+    width: 35px;
 
-    height: 38px;
+    height: 35px;
 
-    border:
-        4px solid #e5e5e5;
+    border: 4px solid #ddd;
 
     border-top-color: #ff0050;
 
     border-radius: 50%;
 
-    animation:
-        spin 0.8s linear infinite;
+    animation: spin 0.8s linear infinite;
 }
 
 
@@ -515,15 +487,16 @@ h2 {
 }
 
 
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 .modal-overlay {
     position: fixed;
 
     inset: 0;
 
-    background:
-        rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.45);
 
     display: flex;
 
@@ -531,14 +504,16 @@ h2 {
 
     align-items: center;
 
-    padding: 20px;
+    z-index: 1100;
 
-    z-index: 10000;
+    padding: 20px;
 }
 
 
 .success-modal {
-    width: min(440px, 100%);
+    width: 100%;
+
+    max-width: 430px;
 
     background: white;
 
@@ -547,19 +522,21 @@ h2 {
     padding: 30px;
 
     text-align: center;
-
-    box-shadow:
-        0 15px 50px
-        rgba(0, 0, 0, 0.2);
 }
 
 
 .success-icon {
-    width: 60px;
+    width: 55px;
 
-    height: 60px;
+    height: 55px;
 
     margin: 0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
     border-radius: 50%;
 
@@ -567,13 +544,9 @@ h2 {
 
     color: white;
 
-    font-size: 35px;
+    font-size: 28px;
 
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
+    font-weight: bold;
 }
 
 
@@ -582,30 +555,16 @@ h2 {
 }
 
 
-.success-modal p {
-    line-height: 1.5;
-
-    color: #333;
-}
-
-
-.processing-text {
-    color: #666 !important;
-
-    font-size: 14px;
-}
-
-
 .ok-button {
+    margin-top: 15px;
+
     border: none;
 
     background: #ff0050;
 
     color: white;
 
-    padding:
-        12px
-        32px;
+    padding: 12px 30px;
 
     border-radius: 10px;
 
@@ -615,61 +574,40 @@ h2 {
 }
 
 
-/* RESPONSIVE */
+/* =========================
+   MOBILE
+========================= */
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
 
     .coin-grid {
         grid-template-columns:
-            repeat(4, minmax(0, 1fr));
+            repeat(2, 1fr);
     }
 
-}
-
-
-@media (max-width: 700px) {
 
     .card {
-        padding: 24px 18px;
-    }
-
-
-    .coin-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-
-    .bottom-area {
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 15px;
-    }
-
-
-    .total {
-        text-align: center;
-    }
-
-
-    .confirm-button {
-        width: 100%;
+        padding: 24px;
     }
 
 }
 
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
 
     .page {
         padding: 15px;
     }
 
 
+    .card {
+        padding: 20px;
+    }
+
+
     .coin-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+            repeat(2, 1fr);
 
         gap: 10px;
     }
@@ -681,6 +619,20 @@ h2 {
 
 
     .payment-card {
+        width: 120px;
+    }
+
+
+    .bottom-area {
+        flex-direction: column;
+
+        gap: 18px;
+
+        align-items: stretch;
+    }
+
+
+    .confirm-button {
         width: 100%;
     }
 
