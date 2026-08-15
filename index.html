@@ -6,363 +6,282 @@
 
     <title>Get Coins</title>
 
-    <!-- Font Awesome Brand Icons -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    >
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<main class="page">
+    <main class="page">
 
-    <section class="card">
+        <section class="card">
 
-        <!-- HEADER -->
-        <header class="header">
             <h1>Get Coins</h1>
 
             <p class="subtitle">
                 Save about 25% on service fees from third-party providers.
             </p>
-        </header>
 
-
-        <!-- USERNAME -->
-        <div class="username-wrapper">
-
+            <!-- USERNAME -->
             <div class="username-box">
 
-                <!-- TikTok logo -->
-                <div class="tiktok-logo">
-                    <i class="fa-brands fa-tiktok"></i>
-                </div>
+                <img
+                    class="tiktok-logo"
+                    src="https://cdn.simpleicons.org/tiktok/000000"
+                    alt="TikTok"
+                >
 
                 <input
                     type="text"
                     id="username"
                     placeholder="Enter your username"
                     autocomplete="off"
-                    spellcheck="false"
+                    maxlength="30"
                 >
 
-                <span
-                    id="username-status"
-                    class="username-status"
-                ></span>
+                <span id="username-status" class="username-status"></span>
 
             </div>
 
-            <div
-                id="username-error"
-                class="username-error"
-            ></div>
 
-        </div>
+            <!-- COIN PACKAGES -->
+            <div class="coin-grid" id="coin-grid">
 
-
-        <!-- COIN PACKAGES -->
-        <div class="coin-grid">
-
-            <button
-                type="button"
-                class="coin-package"
-                data-coins="30"
-                data-price="0.38"
-            >
-                <div class="coin-icon">
-                    <i class="fa-brands fa-tiktok"></i>
-                </div>
-
-                <strong>30</strong>
-                <span>$0.38</span>
-            </button>
+                <button class="coin-card" data-coins="30" data-price="0.38">
+                    <img
+                        src="https://cdn.simpleicons.org/tiktok/FFD600"
+                        alt=""
+                    >
+                    <strong>30</strong>
+                    <span>$0.38</span>
+                </button>
 
 
-            <button
-                type="button"
-                class="coin-package"
-                data-coins="350"
-                data-price="4.36"
-            >
-                <div class="coin-icon">
-                    <i class="fa-brands fa-tiktok"></i>
-                </div>
-
-                <strong>350</strong>
-                <span>$4.36</span>
-            </button>
+                <button class="coin-card" data-coins="350" data-price="4.36">
+                    <img
+                        src="https://cdn.simpleicons.org/tiktok/FFD600"
+                        alt=""
+                    >
+                    <strong>350</strong>
+                    <span>$4.36</span>
+                </button>
 
 
-            <button
-                type="button"
-                class="coin-package"
-                data-coins="700"
-                data-price="8.73"
-            >
-                <div class="coin-icon">
-                    <i class="fa-brands fa-tiktok"></i>
-                </div>
-
-                <strong>700</strong>
-                <span>$8.73</span>
-            </button>
+                <button class="coin-card" data-coins="700" data-price="8.73">
+                    <img
+                        src="https://cdn.simpleicons.org/tiktok/FFD600"
+                        alt=""
+                    >
+                    <strong>700</strong>
+                    <span>$8.73</span>
+                </button>
 
 
-            <button
-                type="button"
-                class="coin-package"
-                data-coins="1400"
-                data-price="17.45"
-            >
-                <div class="coin-icon">
-                    <i class="fa-brands fa-tiktok"></i>
-                </div>
-
-                <strong>1,400</strong>
-                <span>$17.45</span>
-            </button>
+                <button class="coin-card" data-coins="1400" data-price="17.45">
+                    <img
+                        src="https://cdn.simpleicons.org/tiktok/FFD600"
+                        alt=""
+                    >
+                    <strong>1,400</strong>
+                    <span>$17.45</span>
+                </button>
 
 
-            <button
-                type="button"
-                class="coin-package"
-                data-coins="3500"
-                data-price="43.63"
-            >
-                <div class="coin-icon">
-                    <i class="fa-brands fa-tiktok"></i>
-                </div>
-
-                <strong>3,500</strong>
-                <span>$43.63</span>
-            </button>
+                <button class="coin-card" data-coins="3500" data-price="43.63">
+                    <img
+                        src="https://cdn.simpleicons.org/tiktok/FFD600"
+                        alt=""
+                    >
+                    <strong>3,500</strong>
+                    <span>$43.63</span>
+                </button>
 
 
-            <button
-                type="button"
-                class="coin-package"
-                data-coins="7000"
-                data-price="87.27"
-            >
-                <div class="coin-icon">
-                    <i class="fa-brands fa-tiktok"></i>
-                </div>
-
-                <strong>7,000</strong>
-                <span>$87.27</span>
-            </button>
+                <button class="coin-card" data-coins="7000" data-price="87.27">
+                    <img
+                        src="https://cdn.simpleicons.org/tiktok/FFD600"
+                        alt=""
+                    >
+                    <strong>7,000</strong>
+                    <span>$87.27</span>
+                </button>
 
 
-            <button
-                type="button"
-                class="coin-package"
-                data-coins="17500"
-                data-price="218.17"
-            >
-                <div class="coin-icon">
-                    <i class="fa-brands fa-tiktok"></i>
-                </div>
-
-                <strong>17,500</strong>
-                <span>$218.17</span>
-            </button>
+                <button class="coin-card" data-coins="17500" data-price="218.17">
+                    <img
+                        src="https://cdn.simpleicons.org/tiktok/FFD600"
+                        alt=""
+                    >
+                    <strong>17,500</strong>
+                    <span>$218.17</span>
+                </button>
 
 
-            <!-- CUSTOM -->
-            <button
-                type="button"
-                class="coin-package custom-package"
-                id="custom-package"
-            >
-                <div class="coin-icon">
-                    <i class="fa-brands fa-tiktok"></i>
-                </div>
+                <button class="coin-card custom-card" id="custom-card">
+                    <img
+                        src="https://cdn.simpleicons.org/tiktok/FFD600"
+                        alt=""
+                    >
+                    <strong>Custom</strong>
+                    <span>Support large quantities</span>
+                </button>
 
-                <strong>Custom</strong>
-
-                <span>
-                    Support large<br>
-                    quantities
-                </span>
-            </button>
-
-        </div>
-
-
-        <!-- CUSTOM COIN INPUT -->
-        <div
-            id="custom-section"
-            class="custom-section"
-        >
-
-            <label for="custom-coins">
-                Enter coin quantity
-            </label>
-
-            <input
-                type="number"
-                id="custom-coins"
-                min="1"
-                max="1000000"
-                placeholder="Enter amount"
-            >
-
-            <div
-                id="custom-price"
-                class="custom-price"
-            >
-                $0.00
             </div>
 
-        </div>
+
+            <!-- CUSTOM COIN -->
+            <div id="custom-section" class="custom-section hidden">
+
+                <label for="custom-coins">
+                    Enter coin quantity
+                </label>
+
+                <input
+                    type="number"
+                    id="custom-coins"
+                    min="1"
+                    step="1"
+                    placeholder="Enter amount"
+                >
+
+                <div class="custom-price" id="custom-price">
+                    $0.00
+                </div>
+
+            </div>
 
 
-        <!-- PAYMENT -->
-        <section class="payment-section">
-
+            <!-- PAYMENT -->
             <h2>Select Payment Method</h2>
 
             <div class="payment-grid">
 
-                <!-- VISA -->
                 <button
-                    type="button"
-                    class="payment-method"
+                    class="payment-card"
                     data-payment="Visa"
                 >
-                    <i class="fa-brands fa-cc-visa payment-logo visa-logo"></i>
+                    <img
+                        src="https://cdn.simpleicons.org/visa/1434CB"
+                        alt="Visa"
+                    >
+
                     <span>Visa</span>
                 </button>
 
 
-                <!-- MASTERCARD -->
                 <button
-                    type="button"
-                    class="payment-method"
+                    class="payment-card"
                     data-payment="MasterCard"
                 >
-                    <i class="fa-brands fa-cc-mastercard payment-logo mastercard-logo"></i>
+                    <img
+                        src="https://cdn.simpleicons.org/mastercard/EB001B"
+                        alt="Mastercard"
+                    >
+
                     <span>MasterCard</span>
                 </button>
 
 
-                <!-- PAYPAL -->
                 <button
-                    type="button"
-                    class="payment-method"
+                    class="payment-card"
                     data-payment="PayPal"
                 >
-                    <i class="fa-brands fa-cc-paypal payment-logo paypal-logo"></i>
+                    <img
+                        src="https://cdn.simpleicons.org/paypal/003087"
+                        alt="PayPal"
+                    >
+
                     <span>PayPal</span>
                 </button>
 
 
-                <!-- JCB -->
                 <button
-                    type="button"
-                    class="payment-method"
+                    class="payment-card"
                     data-payment="JCB"
                 >
-                    <i class="fa-brands fa-cc-jcb payment-logo jcb-logo"></i>
+                    <img
+                        src="https://cdn.simpleicons.org/jcb/0E4C96"
+                        alt="JCB"
+                    >
+
                     <span>JCB</span>
+                </button>
+
+            </div>
+
+
+            <!-- BOTTOM -->
+            <div class="bottom-area">
+
+                <div class="total">
+                    Total:
+                    <span id="total-coins">0</span>
+                    coins
+                </div>
+
+                <button id="confirm-button" class="confirm-button">
+                    Confirm
                 </button>
 
             </div>
 
         </section>
 
+    </main>
 
-        <!-- BOTTOM -->
-        <div class="bottom-row">
 
-            <div class="total">
-                Total:
-                <strong id="total-coins">0</strong>
-                coins
+    <!-- LOADING -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+
+        <div class="loader"></div>
+
+    </div>
+
+
+    <!-- SUCCESS MODAL -->
+    <div id="success-overlay" class="modal-overlay hidden">
+
+        <div class="success-modal">
+
+            <div class="success-icon">
+                ✓
             </div>
 
-            <button
-                type="button"
-                id="confirm-button"
-                class="confirm-button"
-            >
-                Confirm
+            <h2>
+                🎉 REQUEST SUCCESSFUL!
+            </h2>
+
+            <p>
+                You have successfully requested
+                <strong id="modal-coins">0</strong>
+                coins for
+                <strong id="modal-username">@username</strong>.
+            </p>
+
+            <p>
+                💳 Amount:
+                <strong id="modal-price">$0.00</strong>
+            </p>
+
+            <p>
+                💳 Payment Method:
+                <strong id="modal-payment">Visa</strong>
+            </p>
+
+            <p class="processing-text">
+                ⏳ Please wait about 24–48 hours for the system
+                to process your transaction.
+            </p>
+
+            <button id="close-modal" class="ok-button">
+                OK
             </button>
 
         </div>
 
-    </section>
-
-</main>
-
-
-<!-- LOADING -->
-<div
-    id="loading-overlay"
-    class="loading-overlay"
->
-
-    <div class="loader"></div>
-
-</div>
-
-
-<!-- SUCCESS MODAL -->
-<div
-    id="success-overlay"
-    class="modal-overlay"
->
-
-    <div class="success-modal">
-
-        <div class="success-check">
-            ✓
-        </div>
-
-        <h2>
-            🎉 REQUEST SUCCESSFUL!
-        </h2>
-
-        <p>
-            You have successfully requested
-            <strong id="success-coins">0</strong>
-            coins for
-            <strong id="success-username">@username</strong>.
-        </p>
-
-        <p>
-            💳 Amount:
-            <strong id="success-price">$0.00</strong>
-        </p>
-
-        <p>
-            💳 Payment Method:
-            <strong id="success-payment">Visa</strong>
-        </p>
-
-        <p class="processing-text">
-            ⏳ Please wait about 24–48 hours for the system
-            to process your transaction.
-        </p>
-
-        <button
-            type="button"
-            id="ok-button"
-            class="ok-button"
-        >
-            OK
-        </button>
-
     </div>
 
-</div>
 
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
