@@ -546,4 +546,3 @@ successOverlay.addEventListener(
 
     }
 );
-```
