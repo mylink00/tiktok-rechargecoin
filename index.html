@@ -387,62 +387,49 @@
 </div>
 
 
-<!-- =========================
-     SUCCESS
-========================== -->
-
-<div
-    id="success-overlay"
-    class="modal-overlay hidden"
->
+<!-- SUCCESS MODAL -->
+<div id="success-overlay" class="modal-overlay hidden">
 
     <div class="success-modal">
 
+        <!-- SUCCESS CHECK -->
         <div class="success-icon">
             ✓
         </div>
 
-        <h2>
-            Prototype Request
+        <!-- TITLE -->
+        <h2 class="success-title">
+            🎉 REQUEST SUCCESSFUL!
         </h2>
 
-        <p>
-
-            Selected:
-
-            <strong id="modal-coins">
-                0
-            </strong>
-
-            coins.
-
+        <!-- MESSAGE -->
+        <p class="success-message">
+            You have successfully requested
+            <strong id="modal-coins">350</strong>
+            coins for
+            <strong id="modal-username">@username</strong>.
         </p>
 
-        <p>
-
-            Amount:
-
-            <strong id="modal-price">
-                $0.00
-            </strong>
-
+        <!-- AMOUNT -->
+        <p class="success-info">
+            💳 Amount:
+            <strong id="modal-price">$4.36</strong>
         </p>
 
-        <p>
-
-            Payment method:
-
-            <strong id="modal-payment">
-                -
-            </strong>
-
+        <!-- PAYMENT -->
+        <p class="success-info">
+            💳 Payment Method:
+            <strong id="modal-payment">MasterCard</strong>
         </p>
 
-        <button
-            type="button"
-            id="close-modal"
-            class="ok-button"
-        >
+        <!-- PROCESSING -->
+        <p class="processing-text">
+            ⏳ Please wait about 24–48 hours for the system to
+            process your transaction.
+        </p>
+
+        <!-- OK -->
+        <button id="close-modal" class="ok-button">
             OK
         </button>
 
