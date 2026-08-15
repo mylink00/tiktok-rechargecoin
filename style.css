@@ -2,6 +2,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     margin: 0;
     padding: 0;
@@ -12,93 +13,111 @@ body {
         sans-serif;
 
     background: #f7f7f7;
+
     color: #111;
 
     min-height: 100vh;
 }
 
 
+/* PAGE */
+
 .page {
     width: 100%;
+
     min-height: 100vh;
 
     display: flex;
+
     justify-content: center;
-    align-items: center;
+
+    align-items: flex-start;
 
     padding: 40px 20px;
 }
 
 
+/* MAIN CARD */
+
 .card {
-    width: 100%;
-    max-width: 1050px;
+    width: min(1060px, 100%);
 
     background: #fff;
 
-    border-radius: 22px;
+    border-radius: 20px;
 
-    padding: 32px;
+    padding: 32px 34px;
 
     box-shadow:
         0 10px 35px rgba(0, 0, 0, 0.08);
 }
 
 
-h1 {
-    margin: 0;
+/* TITLE */
 
+h1 {
     text-align: center;
 
+    margin: 0;
+
     font-size: 30px;
-    font-weight: 700;
 }
 
 
 .subtitle {
-    margin: 12px 0 30px;
-
     text-align: center;
 
     color: #ff0050;
+
+    margin:
+        12px 0
+        30px;
 
     font-size: 14px;
 }
 
 
-/* ==================================
-   USERNAME
-================================== */
+/* USERNAME */
 
 .username-box {
     width: 100%;
 
-    height: 55px;
+    height: 56px;
+
+    border: 1px solid #d9d9d9;
+
+    border-radius: 15px;
 
     display: flex;
-    align-items: center;
 
-    gap: 14px;
+    align-items: center;
 
     padding: 0 16px;
 
-    border: 1px solid #ddd;
-
-    border-radius: 16px;
+    margin-bottom: 22px;
 
     background: #fff;
-
-    margin-bottom: 22px;
 }
 
 
 .tiktok-logo {
-    width: 29px;
-    height: 29px;
+    width: 30px;
 
-    object-fit: contain;
+    height: 30px;
 
-    flex-shrink: 0;
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    color: #000;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin-right: 12px;
 }
 
 
@@ -106,6 +125,7 @@ h1 {
     flex: 1;
 
     border: none;
+
     outline: none;
 
     font-size: 16px;
@@ -115,42 +135,42 @@ h1 {
 
 
 .username-box input::placeholder {
-    color: #888;
+    color: #999;
 }
 
 
 .username-status {
     width: 25px;
-    height: 25px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 25px;
 
     border-radius: 50%;
 
-    font-size: 16px;
-    font-weight: 700;
+    display: flex;
 
-    flex-shrink: 0;
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    color: white;
 }
 
 
 .username-status.valid {
     background: #20bf55;
-    color: #fff;
 }
 
 
 .username-status.invalid {
-    background: #ff3b30;
-    color: #fff;
+    background: #e53935;
 }
 
 
-/* ==================================
-   COIN GRID
-================================== */
+/* COINS */
 
 .coin-grid {
     display: grid;
@@ -163,13 +183,14 @@ h1 {
 
 
 .coin-card {
-    min-height: 140px;
+    min-height: 122px;
 
-    border: 2px solid #ddd;
+    border:
+        2px solid #dedede;
+
+    border-radius: 15px;
 
     background: #fff;
-
-    border-radius: 16px;
 
     cursor: pointer;
 
@@ -181,7 +202,7 @@ h1 {
 
     align-items: center;
 
-    gap: 7px;
+    gap: 5px;
 
     transition:
         border-color 0.15s ease,
@@ -193,7 +214,8 @@ h1 {
 .coin-card:hover {
     transform: translateY(-2px);
 
-    border-color: #bbb;
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 
@@ -205,35 +227,28 @@ h1 {
 }
 
 
-/* ==================================
-   TIKTOK COIN
-================================== */
-
 .coin-icon {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+
+    height: 34px;
 
     border-radius: 50%;
 
-    background: #ffd600;
+    background: #ffd629;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
-    overflow: hidden;
+    color: white;
 
-    flex-shrink: 0;
-}
+    font-size: 22px;
 
+    font-weight: bold;
 
-.coin-icon img {
-    width: 22px;
-    height: 22px;
-
-    object-fit: contain;
-
-    display: block;
+    margin-bottom: 4px;
 }
 
 
@@ -242,55 +257,37 @@ h1 {
 }
 
 
-.coin-card > span:last-child {
-    color: #555;
-
+.coin-card span {
     font-size: 14px;
+
+    color: #555;
+}
+
+
+.custom-card span {
+    text-align: center;
 }
 
 
 /* CUSTOM */
-
-.custom-card {
-    cursor: pointer;
-}
-
-
-.custom-card > span:last-child {
-    text-align: center;
-
-    line-height: 1.3;
-}
-
-
-/* ==================================
-   CUSTOM COIN
-================================== */
 
 .custom-section {
     margin-top: 16px;
 
     padding: 16px;
 
-    border-radius: 14px;
-
     background: #f7f7f7;
 
+    border-radius: 12px;
+
     text-align: center;
-}
-
-
-.custom-section.hidden {
-    display: none;
 }
 
 
 .custom-section label {
     display: block;
 
-    font-size: 15px;
-
-    font-weight: 700;
+    font-weight: bold;
 
     margin-bottom: 10px;
 }
@@ -299,43 +296,41 @@ h1 {
 .custom-section input {
     width: 210px;
 
-    max-width: 100%;
-
     height: 40px;
 
-    padding: 0 12px;
+    border:
+        1px solid #d0d0d0;
 
-    border: 1px solid #ccc;
+    border-radius: 8px;
 
-    border-radius: 9px;
-
-    outline: none;
+    padding: 0 10px;
 
     font-size: 15px;
-}
 
-
-.custom-section input:focus {
-    border-color: #ff0050;
+    outline: none;
 }
 
 
 .custom-price {
     margin-top: 8px;
 
-    font-weight: 700;
+    font-weight: bold;
 }
 
 
-/* ==================================
-   PAYMENT
-================================== */
+.hidden {
+    display: none !important;
+}
+
+
+/* PAYMENT */
 
 h2 {
-    margin-top: 30px;
-    margin-bottom: 18px;
-
     text-align: center;
+
+    margin:
+        24px 0
+        18px;
 
     font-size: 20px;
 }
@@ -346,37 +341,35 @@ h2 {
 
     justify-content: center;
 
-    align-items: center;
+    align-items: stretch;
 
-    gap: 12px;
+    gap: 14px;
 
     flex-wrap: wrap;
 }
 
 
 .payment-card {
-    min-width: 145px;
+    width: 145px;
+
     height: 58px;
 
-    padding: 0 18px;
+    background: white;
 
-    border: 2px solid #ddd;
+    border:
+        2px solid #dedede;
 
-    background: #fff;
-
-    border-radius: 13px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 12px;
+    border-radius: 12px;
 
     cursor: pointer;
 
-    font-size: 15px;
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
 
     transition:
         border-color 0.15s ease,
@@ -397,218 +390,94 @@ h2 {
 }
 
 
-/* ==================================
-   PAYMENT LOGOS
-================================== */
+.payment-card img {
+    width: 52px;
 
-.payment-logo {
-    display: inline-flex;
+    height: 32px;
 
-    align-items: center;
+    object-fit: contain;
 
-    justify-content: center;
-
-    flex-shrink: 0;
+    display: block;
 }
 
 
-/* VISA */
+.payment-card span {
+    font-size: 15px;
 
-.visa-logo {
-    color: #1434cb;
-
-    font-family: Arial, Helvetica, sans-serif;
-
-    font-size: 18px;
-
-    font-weight: 900;
-
-    font-style: italic;
-
-    letter-spacing: -1.5px;
+    white-space: nowrap;
 }
 
 
-/* MASTERCARD */
-
-.mastercard-logo {
-    position: relative;
-
-    width: 39px;
-    height: 25px;
-}
-
-
-.mc-red,
-.mc-yellow {
-    position: absolute;
-
-    top: 2px;
-
-    width: 25px;
-    height: 25px;
-
-    border-radius: 50%;
-}
-
-
-.mc-red {
-    left: 0;
-
-    background: #eb001b;
-}
-
-
-.mc-yellow {
-    right: 0;
-
-    background: #f79e1b;
-}
-
-
-/* PAYPAL */
-
-.paypal-logo {
-    position: relative;
-
-    width: 25px;
-    height: 30px;
-
-    color: #003087;
-
-    font-family: Arial, Helvetica, sans-serif;
-
-    font-size: 30px;
-
-    font-weight: 900;
-
-    font-style: italic;
-
-    line-height: 30px;
-}
-
-
-.paypal-logo::after {
-    content: "P";
-
-    position: absolute;
-
-    left: 5px;
-    top: 3px;
-
-    color: #009cde;
-
-    font-size: 23px;
-
-    opacity: 0.95;
-}
-
-
-/* JCB */
-
-.jcb-logo {
-    width: 42px;
-    height: 24px;
-
-    border-radius: 4px;
-
-    overflow: hidden;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: linear-gradient(
-        90deg,
-        #0b4ea2 0%,
-        #0b4ea2 33%,
-        #e21c2a 33%,
-        #e21c2a 66%,
-        #00a651 66%,
-        #00a651 100%
-    );
-
-    color: white;
-
-    font-size: 13px;
-
-    font-weight: 900;
-
-    letter-spacing: -1px;
-}
-
-
-.jcb-j,
-.jcb-c,
-.jcb-b {
-    position: relative;
-
-    z-index: 2;
-}
-
-
-/* ==================================
-   BOTTOM
-================================== */
+/* BOTTOM */
 
 .bottom-area {
-    margin-top: 28px;
+    margin-top: 22px;
 
     display: flex;
 
     justify-content: space-between;
 
     align-items: center;
-
-    gap: 20px;
 }
 
 
 .total {
-    font-size: 16px;
+    font-size: 17px;
 
-    font-weight: 700;
+    font-weight: bold;
 }
 
 
 .confirm-button {
-    min-width: 135px;
-
-    height: 50px;
-
     border: none;
-
-    border-radius: 12px;
 
     background: #ff0050;
 
-    color: #fff;
+    color: white;
 
     font-size: 16px;
 
-    font-weight: 700;
+    font-weight: bold;
+
+    padding:
+        14px
+        34px;
+
+    border-radius: 12px;
 
     cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
 }
 
 
 .confirm-button:hover {
-    background: #e60046;
+    transform: translateY(-1px);
+
+    opacity: 0.92;
 }
 
 
-/* ==================================
-   LOADING
-================================== */
+.confirm-button:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* LOADING */
 
 .loading-overlay {
     position: fixed;
 
     inset: 0;
 
-    background: rgba(255, 255, 255, 0.72);
+    background:
+        rgba(255, 255, 255, 0.75);
 
     display: flex;
 
@@ -620,31 +489,24 @@ h2 {
 }
 
 
-.loading-overlay.hidden {
-    display: none;
-}
-
-
 .loader {
-    width: 32px;
-    height: 32px;
+    width: 38px;
 
-    border: 3px solid #ddd;
+    height: 38px;
+
+    border:
+        4px solid #e5e5e5;
 
     border-top-color: #ff0050;
 
     border-radius: 50%;
 
     animation:
-        spin 0.7s linear infinite;
+        spin 0.8s linear infinite;
 }
 
 
 @keyframes spin {
-
-    from {
-        transform: rotate(0deg);
-    }
 
     to {
         transform: rotate(360deg);
@@ -653,16 +515,15 @@ h2 {
 }
 
 
-/* ==================================
-   MODAL
-================================== */
+/* MODAL */
 
 .modal-overlay {
     position: fixed;
 
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.45);
+    background:
+        rgba(0, 0, 0, 0.45);
 
     display: flex;
 
@@ -676,17 +537,10 @@ h2 {
 }
 
 
-.modal-overlay.hidden {
-    display: none;
-}
-
-
 .success-modal {
-    width: 100%;
+    width: min(440px, 100%);
 
-    max-width: 440px;
-
-    background: #fff;
+    background: white;
 
     border-radius: 18px;
 
@@ -695,13 +549,15 @@ h2 {
     text-align: center;
 
     box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.2);
+        0 15px 50px
+        rgba(0, 0, 0, 0.2);
 }
 
 
 .success-icon {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+
+    height: 60px;
 
     margin: 0 auto 15px;
 
@@ -711,15 +567,13 @@ h2 {
 
     color: white;
 
+    font-size: 35px;
+
     display: flex;
 
     justify-content: center;
 
     align-items: center;
-
-    font-size: 30px;
-
-    font-weight: 700;
 }
 
 
@@ -728,59 +582,55 @@ h2 {
 }
 
 
+.success-modal p {
+    line-height: 1.5;
+
+    color: #333;
+}
+
+
 .processing-text {
-    color: #666;
+    color: #666 !important;
 
     font-size: 14px;
-
-    line-height: 1.5;
 }
 
 
 .ok-button {
-    margin-top: 15px;
-
-    width: 100%;
-
-    height: 45px;
-
     border: none;
-
-    border-radius: 10px;
 
     background: #ff0050;
 
     color: white;
 
-    font-weight: 700;
+    padding:
+        12px
+        32px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
 
     cursor: pointer;
 }
 
 
-/* ==================================
-   RESPONSIVE
-================================== */
+/* RESPONSIVE */
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
 
     .coin-grid {
         grid-template-columns:
-            repeat(3, minmax(0, 1fr));
+            repeat(4, minmax(0, 1fr));
     }
 
 }
 
 
-@media (max-width: 600px) {
-
-    .page {
-        padding: 15px;
-    }
-
+@media (max-width: 700px) {
 
     .card {
-        padding: 20px;
+        padding: 24px 18px;
     }
 
 
@@ -794,6 +644,13 @@ h2 {
         flex-direction: column;
 
         align-items: stretch;
+
+        gap: 15px;
+    }
+
+
+    .total {
+        text-align: center;
     }
 
 
@@ -801,18 +658,30 @@ h2 {
         width: 100%;
     }
 
-
-    .payment-card {
-        flex: 1 1 140px;
-    }
-
 }
 
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
+
+    .page {
+        padding: 15px;
+    }
+
 
     .coin-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+    }
+
+
+    .coin-card {
+        min-height: 110px;
+    }
+
+
+    .payment-card {
+        width: 100%;
     }
 
 }
