@@ -2,54 +2,47 @@
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
     padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
     font-family: Arial, Helvetica, sans-serif;
     background: #f7f7f7;
     color: #111;
 }
 
-button,
-input {
-    font-family: inherit;
-}
 
-button {
-    cursor: pointer;
-}
-
-
-/* ================================
-   PAGE
-================================ */
+/* =========================
+   MAIN PAGE
+========================= */
 
 .page {
+    width: 100%;
     min-height: 100vh;
+    padding: 55px 20px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 55px 20px;
 }
-
-
-/* ================================
-   MAIN CARD
-================================ */
 
 .card {
     width: 100%;
     max-width: 1070px;
-    background: #fff;
+    background: #ffffff;
     border-radius: 18px;
     padding: 28px 38px 22px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 
-/* ================================
+/* =========================
    HEADER
-================================ */
+========================= */
 
 .header {
     text-align: center;
@@ -58,7 +51,6 @@ button {
 .header h1 {
     margin: 0;
     font-size: 30px;
-    font-weight: 700;
 }
 
 .subtitle {
@@ -68,77 +60,56 @@ button {
 }
 
 
-/* ================================
+/* =========================
    USERNAME
-================================ */
-
-.username-wrapper {
-    width: 100%;
-    margin-bottom: 10px;
-}
+========================= */
 
 .username-box {
+    width: 100%;
     height: 54px;
-    border: 1px solid #d8d8d8;
-    border-radius: 14px;
     display: flex;
     align-items: center;
+    border: 1px solid #d8d8d8;
+    border-radius: 14px;
     padding: 0 14px;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    background: white;
 }
-
-.username-box:focus-within {
-    border-color: #999;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
-}
-
-
-/* TikTok logo */
 
 .tiktok-logo {
     width: 32px;
     height: 32px;
+    min-width: 32px;
     border-radius: 8px;
     background: #000;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 13px;
-    flex-shrink: 0;
 }
 
 .tiktok-logo i {
-    color: #fff;
+    color: white;
     font-size: 19px;
 }
 
-
 #username {
     flex: 1;
-    border: none;
-    outline: none;
+    width: 100%;
+    border: 0;
+    outline: 0;
     font-size: 17px;
     background: transparent;
-    min-width: 0;
 }
-
-#username::placeholder {
-    color: #777;
-}
-
-
-/* Username status */
 
 .username-status {
     width: 25px;
     height: 25px;
+    min-width: 25px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
     font-weight: bold;
-    flex-shrink: 0;
 }
 
 .username-status.valid {
@@ -153,42 +124,47 @@ button {
 
 .username-error {
     min-height: 18px;
-    padding: 5px 4px 0;
-    color: #e53935;
     font-size: 12px;
+    color: #e53935;
 }
 
 
-/* ================================
+/* =========================
    COINS
-================================ */
+========================= */
 
 .coin-grid {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+
+    /* QUAN TRỌNG */
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
     gap: 16px;
     margin-top: 8px;
 }
 
 .coin-package {
+    width: 100%;
     min-height: 128px;
+
     background: white;
+
     border: 2px solid #ddd;
     border-radius: 14px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     padding: 15px 8px;
-    transition:
-        border-color 0.18s,
-        box-shadow 0.18s,
-        transform 0.18s;
+
+    cursor: pointer;
 }
 
 .coin-package:hover {
     border-color: #aaa;
-    transform: translateY(-1px);
 }
 
 .coin-package.selected {
@@ -197,26 +173,25 @@ button {
 }
 
 
-/* Coin icon */
+/* Coin */
 
 .coin-icon {
     width: 34px;
     height: 34px;
     border-radius: 50%;
+
     background: #ffd629;
-    border: 2px solid #f4c800;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     margin-bottom: 8px;
 }
 
 .coin-icon i {
     color: white;
     font-size: 17px;
-    text-shadow:
-        -1px 0 #25f4ee,
-        1px 0 #fe2c55;
 }
 
 .coin-package strong {
@@ -225,21 +200,21 @@ button {
 }
 
 .coin-package span {
-    color: #555;
     font-size: 15px;
+    color: #555;
 }
 
 
-/* ================================
-   CUSTOM
-================================ */
+/* =========================
+   CUSTOM COINS
+========================= */
 
 .custom-section {
     display: none;
-    margin: 16px 0 4px;
+    margin-top: 16px;
     padding: 16px;
-    border-radius: 12px;
     background: #f8f8f8;
+    border-radius: 12px;
     text-align: center;
 }
 
@@ -249,33 +224,31 @@ button {
 
 .custom-section label {
     display: block;
-    font-size: 14px;
-    font-weight: 600;
     margin-bottom: 8px;
+    font-weight: bold;
 }
 
 #custom-coins {
     width: 220px;
-    max-width: 100%;
-    padding: 10px 12px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 15px;
-    outline: none;
 }
 
 .custom-price {
     margin-top: 8px;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 
-/* ================================
+/* =========================
    PAYMENT
-================================ */
+========================= */
 
 .payment-section {
-    margin-top: 20px;
+    width: 100%;
+    margin-top: 24px;
 }
 
 .payment-section h2 {
@@ -285,28 +258,33 @@ button {
 }
 
 .payment-grid {
+    width: 100%;
+
     display: flex;
+    flex-direction: row;
+
     justify-content: center;
     align-items: center;
+
     gap: 14px;
-    flex-wrap: wrap;
 }
 
 .payment-method {
-    min-width: 150px;
+    width: 150px;
     height: 58px;
-    padding: 0 18px;
-    background: #fff;
+
+    background: white;
+
     border: 2px solid #ddd;
     border-radius: 13px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     gap: 13px;
-    transition:
-        border-color 0.18s,
-        box-shadow 0.18s,
-        background 0.18s;
+
+    cursor: pointer;
 }
 
 .payment-method:hover {
@@ -320,40 +298,44 @@ button {
 
 .payment-method span {
     font-size: 15px;
-    color: #222;
 }
 
 
-/* Payment logos */
+/* =========================
+   PAYMENT LOGOS
+========================= */
 
 .payment-logo {
-    font-size: 31px;
-    line-height: 1;
+    font-size: 31px !important;
+    line-height: 1 !important;
 }
 
 .visa-logo {
-    color: #1a1f71;
+    color: #1a1f71 !important;
 }
 
 .mastercard-logo {
-    color: #eb001b;
+    color: #eb001b !important;
 }
 
 .paypal-logo {
-    color: #003087;
+    color: #003087 !important;
 }
 
 .jcb-logo {
-    color: #0b4ea2;
+    color: #0b4ea2 !important;
 }
 
 
-/* ================================
+/* =========================
    BOTTOM
-================================ */
+========================= */
 
 .bottom-row {
+    width: 100%;
+
     margin-top: 20px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -364,43 +346,38 @@ button {
     font-weight: 600;
 }
 
-#total-coins {
-    font-weight: 700;
-}
-
 .confirm-button {
-    min-width: 138px;
+    width: 138px;
     height: 50px;
-    border: none;
+
+    border: 0;
     border-radius: 12px;
+
     background: #ff0050;
     color: white;
+
     font-size: 17px;
-    font-weight: 700;
-    transition: background 0.18s, transform 0.18s;
-}
+    font-weight: bold;
 
-.confirm-button:hover {
-    background: #e90048;
-    transform: translateY(-1px);
-}
-
-.confirm-button:active {
-    transform: translateY(0);
+    cursor: pointer;
 }
 
 
-/* ================================
+/* =========================
    LOADING
-================================ */
+========================= */
 
 .loading-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.38);
+
     display: none;
+
     align-items: center;
     justify-content: center;
+
+    background: rgba(0, 0, 0, 0.38);
+
     z-index: 1000;
 }
 
@@ -411,9 +388,12 @@ button {
 .loader {
     width: 42px;
     height: 42px;
-    border: 4px solid rgba(255, 255, 255, 0.35);
+
+    border: 4px solid rgba(255,255,255,0.35);
     border-top-color: white;
+
     border-radius: 50%;
+
     animation: spin 0.8s linear infinite;
 }
 
@@ -424,18 +404,21 @@ button {
 }
 
 
-/* ================================
+/* =========================
    SUCCESS MODAL
-================================ */
+========================= */
 
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.42);
+
     display: none;
+
     align-items: center;
     justify-content: center;
-    padding: 20px;
+
+    background: rgba(0,0,0,0.42);
+
     z-index: 1100;
 }
 
@@ -444,131 +427,56 @@ button {
 }
 
 .success-modal {
-    width: 100%;
-    max-width: 550px;
+    width: 550px;
+    max-width: 90%;
+
     background: white;
+
     border-radius: 8px;
+
     padding: 40px 32px 28px;
+
     text-align: center;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
 }
 
 .success-check {
     width: 94px;
     height: 94px;
+
     margin: 0 auto 28px;
+
     border: 5px solid #b9e8a5;
     border-radius: 50%;
+
     color: #8bd46d;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 56px;
-    font-weight: 300;
 }
 
 .success-modal h2 {
-    margin: 0 0 28px;
     color: #555;
-    font-size: 29px;
 }
 
 .success-modal p {
     color: #666;
-    font-size: 17px;
     line-height: 1.5;
-    margin: 14px 0;
-}
-
-.success-modal strong {
-    color: #444;
-}
-
-.processing-text {
-    margin-top: 26px !important;
-    font-size: 14px !important;
-    color: #777 !important;
 }
 
 .ok-button {
-    margin-top: 22px;
+    margin-top: 20px;
+
     padding: 11px 23px;
-    border: none;
+
+    border: 0;
     border-radius: 5px;
+
     background: #20b45a;
     color: white;
+
     font-size: 16px;
     cursor: pointer;
-}
-
-.ok-button:hover {
-    background: #189c4d;
-}
-
-
-/* ================================
-   RESPONSIVE
-================================ */
-
-@media (max-width: 850px) {
-
-    .card {
-        padding: 25px 20px;
-    }
-
-    .coin-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-}
-
-@media (max-width: 600px) {
-
-    .page {
-        padding: 20px 10px;
-    }
-
-    .card {
-        border-radius: 12px;
-        padding: 22px 14px;
-    }
-
-    .coin-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-
-    .coin-package {
-        min-height: 120px;
-    }
-
-    .payment-method {
-        min-width: 140px;
-    }
-
-    .bottom-row {
-        gap: 15px;
-    }
-
-    .confirm-button {
-        min-width: 120px;
-    }
-
-}
-
-@media (max-width: 420px) {
-
-    .bottom-row {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .total {
-        text-align: center;
-    }
-
-    .confirm-button {
-        width: 100%;
-    }
-
 }
