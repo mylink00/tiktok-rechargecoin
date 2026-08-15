@@ -487,153 +487,251 @@ h2 {
 }
 
 
-/* =========================
-   MODAL
-========================= */
+/* =========================================
+   SUCCESS MODAL
+   ========================================= */
 
 .modal-overlay {
     position: fixed;
-
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.45);
-
     display: flex;
-
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
+    background: rgba(0, 0, 0, 0.40);
 
-    z-index: 1100;
+    z-index: 9999;
 
     padding: 20px;
 }
 
 
-.success-modal {
-    width: 100%;
+/* =========================================
+   HIDE
+   ========================================= */
 
-    max-width: 430px;
-
-    background: white;
-
-    border-radius: 18px;
-
-    padding: 30px;
-
-    text-align: center;
+.hidden {
+    display: none !important;
 }
 
 
-.success-icon {
-    width: 55px;
+/* =========================================
+   MODAL BOX
+   ========================================= */
 
-    height: 55px;
+.success-modal {
+    width: 550px;
+    max-width: calc(100vw - 40px);
 
-    margin: 0 auto 15px;
+    min-height: 545px;
+
+    background: #ffffff;
+
+    border-radius: 4px;
+
+    padding: 42px 32px 28px;
+
+    box-sizing: border-box;
+
+    text-align: center;
 
     display: flex;
-
+    flex-direction: column;
     align-items: center;
 
-    justify-content: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+    animation: successModalIn 0.20s ease-out;
+}
+
+
+/* =========================================
+   MODAL ANIMATION
+   ========================================= */
+
+@keyframes successModalIn {
+
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================================
+   SUCCESS CHECK
+   ========================================= */
+
+.success-icon {
+    width: 92px;
+    height: 92px;
 
     border-radius: 50%;
 
-    background: #20bf55;
+    border: 5px solid #dff1d5;
 
-    color: white;
+    color: #9bdd7a;
 
-    font-size: 28px;
+    font-size: 62px;
+    font-weight: 300;
 
-    font-weight: bold;
+    line-height: 82px;
+
+    text-align: center;
+
+    margin-bottom: 38px;
+
+    box-sizing: border-box;
 }
 
 
-.success-modal h2 {
-    margin-top: 0;
+/* =========================================
+   TITLE
+   ========================================= */
+
+.success-title {
+    margin: 0 0 38px;
+
+    font-size: 34px;
+    font-weight: 400;
+
+    color: #555555;
+
+    line-height: 1.2;
 }
 
+
+/* =========================================
+   MAIN MESSAGE
+   ========================================= */
+
+.success-message {
+    margin: 0 0 25px;
+
+    font-size: 20px;
+    line-height: 1.5;
+
+    color: #666666;
+}
+
+.success-message strong {
+    color: #555555;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   INFORMATION LINES
+   ========================================= */
+
+.success-info {
+    margin: 0 0 22px;
+
+    font-size: 20px;
+    line-height: 1.4;
+
+    color: #666666;
+}
+
+.success-info strong {
+    color: #555555;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   PROCESSING MESSAGE
+   ========================================= */
+
+.processing-text {
+    max-width: 470px;
+
+    margin: 0 auto 45px;
+
+    font-size: 16px;
+    line-height: 1.45;
+
+    color: #777777;
+}
+
+
+/* =========================================
+   OK BUTTON
+   ========================================= */
 
 .ok-button {
-    margin-top: 15px;
+    width: 62px;
+    height: 42px;
 
     border: none;
+    border-radius: 4px;
 
-    background: #ff0050;
+    background: #16a34a;
 
-    color: white;
+    color: #ffffff;
 
-    padding: 12px 30px;
-
-    border-radius: 10px;
-
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 500;
 
     cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+.ok-button:hover {
+    background: #12843c;
+}
+
+.ok-button:active {
+    transform: scale(0.97);
 }
 
 
-/* =========================
+/* =========================================
    MOBILE
-========================= */
+   ========================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
 
-    .coin-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-
-    .card {
-        padding: 24px;
-    }
-
-}
-
-
-@media (max-width: 500px) {
-
-    .page {
-        padding: 15px;
-    }
-
-
-    .card {
-        padding: 20px;
-    }
-
-
-    .coin-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 10px;
-    }
-
-
-    .coin-card {
-        min-height: 110px;
-    }
-
-
-    .payment-card {
-        width: 120px;
-    }
-
-
-    .bottom-area {
-        flex-direction: column;
-
-        gap: 18px;
-
-        align-items: stretch;
-    }
-
-
-    .confirm-button {
+    .success-modal {
         width: 100%;
+        min-height: auto;
+
+        padding: 32px 22px 25px;
+    }
+
+    .success-icon {
+        width: 78px;
+        height: 78px;
+
+        font-size: 52px;
+        line-height: 68px;
+
+        margin-bottom: 28px;
+    }
+
+    .success-title {
+        font-size: 26px;
+        margin-bottom: 28px;
+    }
+
+    .success-message,
+    .success-info {
+        font-size: 17px;
+    }
+
+    .processing-text {
+        font-size: 14px;
+        margin-bottom: 30px;
     }
 
 }
