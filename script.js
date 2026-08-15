@@ -1,3 +1,7 @@
+/* =========================
+   ELEMENTS
+========================= */
+
 const usernameInput =
     document.getElementById("username");
 
@@ -53,6 +57,10 @@ const modalCoins =
     document.getElementById("modal-coins");
 
 
+const modalUsername =
+    document.getElementById("modal-username");
+
+
 const modalPrice =
     document.getElementById("modal-price");
 
@@ -60,6 +68,14 @@ const modalPrice =
 const modalPayment =
     document.getElementById("modal-payment");
 
+
+const successIcon =
+    document.getElementById("success-icon");
+
+
+/* =========================
+   VARIABLES
+========================= */
 
 let selectedCoins = 0;
 
@@ -94,12 +110,12 @@ usernameInput.addEventListener(
 
 
         /*
-         * Only:
+         * Username:
          * a-z
          * A-Z
          * 0-9
-         * underscore
-         * period
+         * _
+         * .
          */
 
         const validUsername =
@@ -143,6 +159,11 @@ coinCards.forEach(
             "click",
             function () {
 
+                /*
+                 * Remove selected state
+                 * from every coin card
+                 */
+
                 coinCards.forEach(
                     function (item) {
 
@@ -154,10 +175,18 @@ coinCards.forEach(
                 );
 
 
+                /*
+                 * Select current card
+                 */
+
                 card.classList.add(
                     "selected"
                 );
 
+
+                /*
+                 * CUSTOM COIN
+                 */
 
                 if (
                     card === customCard
@@ -169,18 +198,33 @@ coinCards.forEach(
 
                     selectedPrice = 0;
 
+
                     totalCoins.textContent =
                         "0";
+
+
+                    customPrice.textContent =
+                        "$0.00";
+
 
                     customSection.classList.remove(
                         "hidden"
                     );
 
+
                     customCoinsInput.focus();
 
-                } else {
+                }
+
+
+                /*
+                 * NORMAL COIN PACKAGE
+                 */
+
+                else {
 
                     isCustom = false;
+
 
                     customSection.classList.add(
                         "hidden"
@@ -232,6 +276,10 @@ customCoinsInput.addEventListener(
             );
 
 
+        /*
+         * Invalid quantity
+         */
+
         if (
             !Number.isFinite(coins) ||
             coins <= 0
@@ -241,34 +289,48 @@ customCoinsInput.addEventListener(
 
             selectedPrice = 0;
 
+
             totalCoins.textContent =
                 "0";
 
+
             customPrice.textContent =
                 "$0.00";
+
 
             return;
 
         }
 
 
+        /*
+         * Only whole coins
+         */
+
         selectedCoins =
             Math.floor(coins);
 
 
         /*
-         * Prototype pricing.
-         * Approximately $0.01247 per coin.
+         * Prototype pricing
          */
 
         selectedPrice =
             selectedCoins * 0.01247;
 
 
+        /*
+         * Display price
+         */
+
         customPrice.textContent =
             "$" +
             selectedPrice.toFixed(2);
 
+
+        /*
+         * Display total coins
+         */
 
         totalCoins.textContent =
             selectedCoins.toLocaleString(
@@ -280,7 +342,7 @@ customCoinsInput.addEventListener(
 
 
 /* =========================
-   PAYMENT
+   PAYMENT SELECTION
 ========================= */
 
 paymentCards.forEach(
@@ -289,6 +351,10 @@ paymentCards.forEach(
         card.addEventListener(
             "click",
             function () {
+
+                /*
+                 * Remove previous selection
+                 */
 
                 paymentCards.forEach(
                     function (item) {
@@ -301,10 +367,18 @@ paymentCards.forEach(
                 );
 
 
+                /*
+                 * Select current payment
+                 */
+
                 card.classList.add(
                     "selected"
                 );
 
+
+                /*
+                 * Save payment name
+                 */
 
                 selectedPayment =
                     card.dataset.payment;
@@ -317,6 +391,40 @@ paymentCards.forEach(
 
 
 /* =========================
+   SUCCESS CHECK ANIMATION
+========================= */
+
+function playSuccessAnimation() {
+
+    /*
+     * Remove previous animation
+     */
+
+    successIcon.classList.remove(
+        "success-animate"
+    );
+
+
+    /*
+     * Force browser to
+     * restart animation
+     */
+
+    void successIcon.offsetWidth;
+
+
+    /*
+     * Start animation
+     */
+
+    successIcon.classList.add(
+        "success-animate"
+    );
+
+}
+
+
+/* =========================
    CONFIRM
 ========================= */
 
@@ -324,9 +432,17 @@ confirmButton.addEventListener(
     "click",
     function () {
 
+        /*
+         * Get username
+         */
+
         const username =
             usernameInput.value.trim();
 
+
+        /*
+         * Username validation
+         */
 
         const validUsername =
             /^[A-Za-z0-9_.]{4,30}$/;
@@ -347,6 +463,10 @@ confirmButton.addEventListener(
         }
 
 
+        /*
+         * Coin validation
+         */
+
         if (
             selectedCoins <= 0
         ) {
@@ -359,6 +479,10 @@ confirmButton.addEventListener(
 
         }
 
+
+        /*
+         * Payment validation
+         */
 
         if (
             selectedPayment === ""
@@ -374,7 +498,14 @@ confirmButton.addEventListener(
 
 
         /*
-         * Show loading screen
+         * Disable button
+         */
+
+        confirmButton.disabled = true;
+
+
+        /*
+         * Show loading
          */
 
         loadingOverlay.classList.remove(
@@ -382,19 +513,25 @@ confirmButton.addEventListener(
         );
 
 
-        confirmButton.disabled = true;
-
+        /*
+         * Simulate processing
+         */
 
         setTimeout(
             function () {
+
+                /*
+                 * Hide loading
+                 */
 
                 loadingOverlay.classList.add(
                     "hidden"
                 );
 
 
-                confirmButton.disabled = false;
-
+                /*
+                 * Update modal data
+                 */
 
                 modalCoins.textContent =
                     selectedCoins.toLocaleString(
@@ -402,19 +539,55 @@ confirmButton.addEventListener(
                     );
 
 
+                /*
+                 * THIS FIXES
+                 * @username PROBLEM
+                 */
+
+                modalUsername.textContent =
+                    "@" + username;
+
+
+                /*
+                 * Update price
+                 */
+
                 modalPrice.textContent =
                     "$" +
                     selectedPrice.toFixed(2);
 
 
+                /*
+                 * Update payment
+
+                 */
+
                 modalPayment.textContent =
                     selectedPayment;
 
+
+                /*
+                 * Show success modal
+                 */
 
                 successOverlay.classList.remove(
                     "hidden"
                 );
 
+
+                /*
+                 * Play animated
+                 * green check
+                 */
+
+                playSuccessAnimation();
+
+
+                /*
+                 * Enable confirm button
+                 */
+
+                confirmButton.disabled = false;
 
             },
             1000
@@ -440,7 +613,9 @@ closeModal.addEventListener(
 );
 
 
-/* Click outside modal */
+/* =========================
+   CLICK OUTSIDE MODAL
+========================= */
 
 successOverlay.addEventListener(
     "click",
