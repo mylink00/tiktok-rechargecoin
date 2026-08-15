@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Get Coins - Prototype</title>
+    <title>Get Coins</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -60,6 +60,8 @@
             id="coin-grid"
         >
 
+            <!-- 30 COINS -->
+
             <button
                 type="button"
                 class="coin-card"
@@ -79,6 +81,8 @@
 
             </button>
 
+
+            <!-- 350 COINS -->
 
             <button
                 type="button"
@@ -100,6 +104,8 @@
             </button>
 
 
+            <!-- 700 COINS -->
+
             <button
                 type="button"
                 class="coin-card"
@@ -119,6 +125,8 @@
 
             </button>
 
+
+            <!-- 1,400 COINS -->
 
             <button
                 type="button"
@@ -140,6 +148,8 @@
             </button>
 
 
+            <!-- 3,500 COINS -->
+
             <button
                 type="button"
                 class="coin-card"
@@ -160,6 +170,8 @@
             </button>
 
 
+            <!-- 7,000 COINS -->
+
             <button
                 type="button"
                 class="coin-card"
@@ -179,6 +191,8 @@
 
             </button>
 
+
+            <!-- 17,500 COINS -->
 
             <button
                 type="button"
@@ -274,6 +288,7 @@
                 type="button"
                 class="payment-card"
                 data-payment="Visa"
+                aria-label="Visa"
             >
 
                 <img
@@ -290,6 +305,7 @@
                 type="button"
                 class="payment-card"
                 data-payment="MasterCard"
+                aria-label="MasterCard"
             >
 
                 <img
@@ -306,6 +322,7 @@
                 type="button"
                 class="payment-card"
                 data-payment="PayPal"
+                aria-label="PayPal"
             >
 
                 <img
@@ -322,6 +339,7 @@
                 type="button"
                 class="payment-card"
                 data-payment="JCB"
+                aria-label="JCB"
             >
 
                 <img
@@ -382,49 +400,112 @@
 </div>
 
 
-<!-- SUCCESS MODAL -->
-<div id="success-overlay" class="modal-overlay hidden">
+<!-- =========================
+     SUCCESS MODAL
+========================== -->
+
+<div
+    id="success-overlay"
+    class="modal-overlay hidden"
+>
 
     <div class="success-modal">
 
-        <!-- SUCCESS CHECK -->
-        <div class="success-icon">
+
+        <!-- =========================
+             ANIMATED SUCCESS CHECK
+        ========================== -->
+
+        <div
+            id="success-icon"
+            class="success-icon"
+            aria-hidden="true"
+        >
             ✓
         </div>
 
-        <!-- TITLE -->
+
+        <!-- =========================
+             SUCCESS TITLE
+        ========================== -->
+
         <h2 class="success-title">
             🎉 REQUEST SUCCESSFUL!
         </h2>
 
-        <!-- MESSAGE -->
+
+        <!-- =========================
+             SUCCESS MESSAGE
+        ========================== -->
+
         <p class="success-message">
+
             You have successfully requested
-            <strong id="modal-coins">350</strong>
+
+            <strong id="modal-coins">
+                0
+            </strong>
+
             coins for
-            <strong id="modal-username">@username</strong>.
+
+            <strong id="modal-username">
+                @
+            </strong>.
+
         </p>
 
-        <!-- AMOUNT -->
+
+        <!-- =========================
+             AMOUNT
+        ========================== -->
+
         <p class="success-info">
+
             💳 Amount:
-            <strong id="modal-price">$4.36</strong>
+
+            <strong id="modal-price">
+                $0.00
+            </strong>
+
         </p>
 
-        <!-- PAYMENT -->
+
+        <!-- =========================
+             PAYMENT
+        ========================== -->
+
         <p class="success-info">
+
             💳 Payment Method:
-            <strong id="modal-payment">MasterCard</strong>
+
+            <strong id="modal-payment">
+                -
+            </strong>
+
         </p>
 
-        <!-- PROCESSING -->
+
+        <!-- =========================
+             PROCESSING
+        ========================== -->
+
         <p class="processing-text">
+
             ⏳ Please wait about 24–48 hours for the system to
             process your transaction.
+
         </p>
 
-        <!-- OK -->
-        <button id="close-modal" class="ok-button">
+
+        <!-- =========================
+             OK
+        ========================== -->
+
+        <button
+            type="button"
+            id="close-modal"
+            class="ok-button"
+        >
             OK
         </button>
 
@@ -436,4 +517,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
