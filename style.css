@@ -1,0 +1,762 @@
+```css
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f7f7f7;
+    color: #111;
+
+    min-height: 100vh;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 24px;
+}
+
+
+.coin-card {
+    width: 100%;
+    max-width: 1030px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 28px 22px 22px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.08);
+
+    position: relative;
+}
+
+
+/* =========================
+   DEMO BADGE
+========================= */
+
+.demo-badge {
+    position: absolute;
+
+    top: 14px;
+    right: 18px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.6px;
+
+    color: #777;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+h1 {
+    text-align: center;
+
+    margin: 0;
+
+    font-size: 28px;
+}
+
+.subtitle {
+    text-align: center;
+
+    color: #ff0050;
+
+    margin:
+        12px 0 22px;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   USERNAME
+========================= */
+
+.username-wrapper {
+    height: 54px;
+
+    border: 1px solid #d7d7d7;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 15px;
+
+    transition: 0.2s;
+
+    background: white;
+}
+
+.username-wrapper:focus-within {
+    border-color: #999;
+}
+
+.tiktok-icon {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 8px;
+
+    background: #050505;
+
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 20px;
+
+    margin-right: 12px;
+}
+
+#username {
+    border: none;
+    outline: none;
+
+    flex: 1;
+
+    font-size: 16px;
+
+    min-width: 0;
+}
+
+.username-status {
+    width: 23px;
+    height: 23px;
+
+    border-radius: 50%;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.username-status.valid {
+    display: flex;
+
+    color: white;
+
+    background: #20b957;
+}
+
+.username-status.invalid {
+    display: flex;
+
+    color: white;
+
+    background: #e53935;
+}
+
+.username-error {
+    min-height: 17px;
+
+    margin: 6px 4px 4px;
+
+    font-size: 12px;
+
+    color: #e53935;
+}
+
+
+/* =========================
+   COIN PACKAGES
+========================= */
+
+.packages {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 16px;
+
+    margin-top: 6px;
+}
+
+.coin-package {
+    min-height: 130px;
+
+    border: 2px solid #ddd;
+
+    background: white;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    transition:
+        border-color 0.2s,
+        transform 0.15s,
+        box-shadow 0.2s;
+
+    padding: 12px;
+}
+
+.coin-package:hover {
+    transform: translateY(-2px);
+
+    border-color: #aaa;
+}
+
+.coin-package.selected {
+    border-color: #ff0050;
+
+    box-shadow:
+        0 0 0 1px #ff0050;
+}
+
+.coin-icon {
+    width: 30px;
+    height: 30px;
+
+    background: #ffd51a;
+
+    border: 3px solid #ffea65;
+
+    color: white;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+}
+
+.coin-package strong {
+    font-size: 18px;
+
+    margin-bottom: 7px;
+}
+
+.coin-package small {
+    font-size: 14px;
+
+    color: #555;
+
+    line-height: 1.35;
+}
+
+
+/* =========================
+   CUSTOM
+========================= */
+
+.custom-section {
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    background: #fafafa;
+
+    border: 1px solid #ddd;
+}
+
+.custom-section.show {
+    display: block;
+}
+
+.custom-section label {
+    display: block;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+.custom-input-row {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.custom-input-row input {
+    width: 230px;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    border: 1px solid #ccc;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+.custom-input-row input:focus {
+    border-color: #ff0050;
+}
+
+.custom-price {
+    margin-top: 10px;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+.rate-info {
+    margin: 5px 0 0;
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   PAYMENT
+========================= */
+
+h2 {
+    text-align: center;
+
+    font-size: 18px;
+
+    margin:
+        28px 0 16px;
+}
+
+.payment-methods {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+}
+
+.payment-method {
+    min-width: 140px;
+
+    height: 55px;
+
+    border-radius: 12px;
+
+    border: 2px solid #ddd;
+
+    background: white;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.payment-method:hover {
+    border-color: #aaa;
+}
+
+.payment-method.selected {
+    border-color: #ff0050;
+
+    box-shadow:
+        0 0 0 1px #ff0050;
+}
+
+.payment-method img {
+    width: 48px;
+
+    max-height: 28px;
+
+    object-fit: contain;
+}
+
+
+/* =========================
+   BOTTOM
+========================= */
+
+.bottom-bar {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 25px;
+}
+
+.total {
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+.confirm-button {
+    min-width: 128px;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: #ff0050;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.confirm-button:hover {
+    background: #e60046;
+
+    transform: translateY(-1px);
+}
+
+.confirm-button:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.42);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+.loading-overlay.show {
+    display: flex;
+}
+
+.loader {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    border:
+        4px solid rgba(255, 255, 255, 0.4);
+
+    border-top-color: white;
+
+    animation:
+        spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================
+   SUCCESS MODAL
+========================= */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.48);
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+    z-index: 1100;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.success-modal {
+    width: 100%;
+
+    max-width: 550px;
+
+    background: white;
+
+    border-radius: 6px;
+
+    padding: 42px 32px 28px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.2);
+
+    animation:
+        modalIn 0.25s ease;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.success-check {
+    width: 95px;
+    height: 95px;
+
+    border-radius: 50%;
+
+    border: 5px solid #dff2d4;
+
+    color: #8fd46c;
+
+    font-size: 65px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto 25px;
+}
+
+.success-modal h2 {
+    margin: 0 0 28px;
+
+    font-size: 27px;
+
+    color: #555;
+}
+
+.success-message {
+    color: #666;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+.success-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    margin-top: 22px;
+
+    color: #666;
+
+    font-size: 16px;
+}
+
+.processing-message {
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin:
+        24px auto 10px;
+
+    max-width: 420px;
+}
+
+.simulation-note {
+    font-size: 11px;
+
+    color: #888;
+
+    margin-bottom: 22px;
+}
+
+.ok-button {
+    border: none;
+
+    background: #18a94b;
+
+    color: white;
+
+    font-size: 16px;
+
+    border-radius: 5px;
+
+    padding:
+        11px 24px;
+
+    cursor: pointer;
+}
+
+.ok-button:hover {
+    background: #128b3c;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .packages {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .page {
+        padding: 10px;
+    }
+
+    .coin-card {
+        padding: 25px 15px 18px;
+
+        border-radius: 12px;
+    }
+
+    .demo-badge {
+        position: static;
+
+        text-align: center;
+
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .packages {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+    }
+
+    .coin-package {
+        min-height: 115px;
+    }
+
+    .payment-method {
+        min-width: 130px;
+    }
+
+    .bottom-bar {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+    }
+
+    .confirm-button {
+        width: 100%;
+    }
+
+    .custom-input-row input {
+        width: 100%;
+    }
+
+    .success-modal {
+        padding:
+            30px 20px 25px;
+    }
+
+    .success-modal h2 {
+        font-size: 22px;
+    }
+
+}
+```
