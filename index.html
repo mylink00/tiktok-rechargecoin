@@ -8,15 +8,89 @@
     <title>Get Coins</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- =========================
+         SUCCESS CHECK ANIMATION
+    ========================== -->
+
+    <style>
+
+        .success-icon {
+            position: relative;
+
+            display: flex !important;
+
+            align-items: center;
+            justify-content: center;
+
+            line-height: 1 !important;
+        }
+
+
+        .success-icon .success-check {
+            width: 58px;
+            height: 58px;
+
+            overflow: visible;
+        }
+
+
+        .success-icon .success-check-path {
+            fill: none;
+
+            stroke: #9bdd7a;
+
+            stroke-width: 5;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+
+            stroke-dasharray: 100;
+
+            stroke-dashoffset: 100;
+        }
+
+
+        .success-icon.animate .success-check-path {
+
+            animation:
+                drawSuccessCheck
+                0.75s
+                ease-out
+                forwards;
+
+        }
+
+
+        @keyframes drawSuccessCheck {
+
+            0% {
+                stroke-dashoffset: 100;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
 <main class="page">
+
 
     <section class="card">
 
+
         <h1>Get Coins</h1>
+
 
         <p class="subtitle">
             Save about 25% on service fees from third-party providers.
@@ -27,13 +101,16 @@
              USERNAME
         ========================== -->
 
+
         <div class="username-box">
+
 
             <img
                 class="tiktok-logo"
                 src="assets/tiktok.png"
                 alt="TikTok"
             >
+
 
             <input
                 type="text"
@@ -43,24 +120,30 @@
                 maxlength="30"
             >
 
+
             <span
                 id="username-status"
                 class="username-status">
             </span>
 
+
         </div>
+
 
 
         <!-- =========================
              COIN PACKAGES
         ========================== -->
 
+
         <div
             class="coin-grid"
             id="coin-grid"
         >
 
+
             <!-- 30 COINS -->
+
 
             <button
                 type="button"
@@ -69,20 +152,26 @@
                 data-price="0.38"
             >
 
+
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+
                 <strong>30</strong>
 
+
                 <span>$0.38</span>
+
 
             </button>
 
 
+
             <!-- 350 COINS -->
+
 
             <button
                 type="button"
@@ -91,20 +180,26 @@
                 data-price="4.36"
             >
 
+
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+
                 <strong>350</strong>
 
+
                 <span>$4.36</span>
+
 
             </button>
 
 
+
             <!-- 700 COINS -->
+
 
             <button
                 type="button"
@@ -113,20 +208,26 @@
                 data-price="8.73"
             >
 
+
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+
                 <strong>700</strong>
 
+
                 <span>$8.73</span>
+
 
             </button>
 
 
+
             <!-- 1,400 COINS -->
+
 
             <button
                 type="button"
@@ -135,20 +236,26 @@
                 data-price="17.45"
             >
 
+
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+
                 <strong>1,400</strong>
 
+
                 <span>$17.45</span>
+
 
             </button>
 
 
+
             <!-- 3,500 COINS -->
+
 
             <button
                 type="button"
@@ -157,20 +264,26 @@
                 data-price="43.63"
             >
 
+
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+
                 <strong>3,500</strong>
 
+
                 <span>$43.63</span>
+
 
             </button>
 
 
+
             <!-- 7,000 COINS -->
+
 
             <button
                 type="button"
@@ -179,20 +292,26 @@
                 data-price="87.27"
             >
 
+
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+
                 <strong>7,000</strong>
 
+
                 <span>$87.27</span>
+
 
             </button>
 
 
+
             <!-- 17,500 COINS -->
+
 
             <button
                 type="button"
@@ -201,20 +320,26 @@
                 data-price="218.17"
             >
 
+
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+
                 <strong>17,500</strong>
 
+
                 <span>$218.17</span>
+
 
             </button>
 
 
+
             <!-- CUSTOM -->
+
 
             <button
                 type="button"
@@ -222,35 +347,44 @@
                 id="custom-card"
             >
 
+
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+
                 <strong>Custom</strong>
+
 
                 <span>
                     Support large quantities
                 </span>
 
+
             </button>
 
+
         </div>
+
 
 
         <!-- =========================
              CUSTOM COIN
         ========================== -->
 
+
         <div
             id="custom-section"
             class="custom-section hidden"
         >
 
+
             <label for="custom-coins">
                 Enter coin quantity
             </label>
+
 
             <input
                 type="number"
@@ -260,29 +394,38 @@
                 placeholder="Enter amount"
             >
 
+
             <div
                 class="custom-price"
                 id="custom-price"
             >
+
                 $0.00
+
             </div>
 
+
         </div>
+
 
 
         <!-- =========================
              PAYMENT
         ========================== -->
 
+
         <h2>
             Select Payment Method
         </h2>
 
 
+
         <div class="payment-grid">
 
 
+
             <!-- VISA -->
+
 
             <button
                 type="button"
@@ -291,15 +434,19 @@
                 aria-label="Visa"
             >
 
+
                 <img
                     src="assets/visa.png"
                     alt="Visa"
                 >
 
+
             </button>
 
 
+
             <!-- MASTERCARD -->
+
 
             <button
                 type="button"
@@ -308,15 +455,19 @@
                 aria-label="MasterCard"
             >
 
+
                 <img
                     src="assets/mastercard.png"
                     alt="MasterCard"
                 >
 
+
             </button>
 
 
+
             <!-- PAYPAL -->
+
 
             <button
                 type="button"
@@ -325,15 +476,19 @@
                 aria-label="PayPal"
             >
 
+
                 <img
                     src="assets/paypal.png"
                     alt="PayPal"
                 >
 
+
             </button>
 
 
+
             <!-- JCB -->
+
 
             <button
                 type="button"
@@ -342,33 +497,44 @@
                 aria-label="JCB"
             >
 
+
                 <img
                     src="assets/jcb.png"
                     alt="JCB"
                 >
 
+
             </button>
 
+
         </div>
+
 
 
         <!-- =========================
              BOTTOM
         ========================== -->
 
+
         <div class="bottom-area">
+
 
             <div class="total">
 
+
                 Total:
+
 
                 <span id="total-coins">
                     0
                 </span>
 
+
                 coins
 
+
             </div>
+
 
 
             <button
@@ -376,145 +542,338 @@
                 id="confirm-button"
                 class="confirm-button"
             >
+
                 Confirm
+
             </button>
+
 
         </div>
 
+
     </section>
 
+
 </main>
+
 
 
 <!-- =========================
      LOADING
 ========================== -->
 
+
 <div
     id="loading-overlay"
     class="loading-overlay hidden"
 >
 
+
     <div class="loader"></div>
 
+
 </div>
+
 
 
 <!-- =========================
      SUCCESS MODAL
 ========================== -->
 
+
 <div
     id="success-overlay"
     class="modal-overlay hidden"
 >
 
+
     <div class="success-modal">
+
 
 
         <!-- =========================
              ANIMATED SUCCESS CHECK
         ========================== -->
 
+
         <div
             id="success-icon"
             class="success-icon"
             aria-hidden="true"
         >
-            ✓
+
+
+            <svg
+                class="success-check"
+                viewBox="0 0 64 64"
+                aria-hidden="true"
+            >
+
+
+                <path
+                    class="success-check-path"
+                    d="M14 34 L27 47 L51 17"
+                ></path>
+
+
+            </svg>
+
+
         </div>
+
 
 
         <!-- =========================
              SUCCESS TITLE
         ========================== -->
 
+
         <h2 class="success-title">
+
             🎉 REQUEST SUCCESSFUL!
+
         </h2>
+
 
 
         <!-- =========================
              SUCCESS MESSAGE
         ========================== -->
 
+
         <p class="success-message">
 
+
             You have successfully requested
+
 
             <strong id="modal-coins">
                 0
             </strong>
 
+
             coins for
+
 
             <strong id="modal-username">
                 @
             </strong>.
 
+
         </p>
+
 
 
         <!-- =========================
              AMOUNT
         ========================== -->
 
+
         <p class="success-info">
 
+
             💳 Amount:
+
 
             <strong id="modal-price">
                 $0.00
             </strong>
 
+
         </p>
+
 
 
         <!-- =========================
              PAYMENT
         ========================== -->
 
+
         <p class="success-info">
 
+
             💳 Payment Method:
+
 
             <strong id="modal-payment">
                 -
             </strong>
 
+
         </p>
+
 
 
         <!-- =========================
              PROCESSING
         ========================== -->
 
+
         <p class="processing-text">
+
 
             ⏳ Please wait about 24–48 hours for the system to
             process your transaction.
 
+
         </p>
+
 
 
         <!-- =========================
              OK
         ========================== -->
 
+
         <button
             type="button"
             id="close-modal"
             class="ok-button"
         >
+
             OK
+
         </button>
 
+
     </div>
+
 
 </div>
 
 
+
+<!-- =========================
+     MAIN JAVASCRIPT
+========================== -->
+
+
 <script src="script.js"></script>
+
+
+
+<!-- =========================
+     TRIGGER SUCCESS CHECK
+     ANIMATION EACH TIME
+     MODAL OPENS
+========================== -->
+
+
+<script>
+
+(function () {
+
+
+    const successOverlay =
+        document.getElementById(
+            "success-overlay"
+        );
+
+
+    const successIcon =
+        document.getElementById(
+            "success-icon"
+        );
+
+
+    if (
+        !successOverlay ||
+        !successIcon
+    ) {
+
+        return;
+
+    }
+
+
+
+    function playSuccessAnimation() {
+
+
+        /*
+         * Remove the animation first.
+         * This makes sure the animation
+         * can play again every time.
+         */
+
+        successIcon.classList.remove(
+            "animate"
+        );
+
+
+        /*
+         * Force browser reflow.
+         * Without this, the browser may
+         * reuse the previous animation.
+         */
+
+        void successIcon.offsetWidth;
+
+
+        /*
+         * Start animation.
+         */
+
+        successIcon.classList.add(
+            "animate"
+        );
+
+    }
+
+
+
+    const observer =
+        new MutationObserver(
+            function (mutations) {
+
+
+                mutations.forEach(
+                    function (mutation) {
+
+
+                        if (
+                            mutation.type ===
+                                "attributes" &&
+
+                            mutation.attributeName ===
+                                "class" &&
+
+                            !successOverlay.classList.contains(
+                                "hidden"
+                            )
+                        ) {
+
+
+                            playSuccessAnimation();
+
+
+                        }
+
+
+                    }
+                );
+
+
+            }
+        );
+
+
+
+    observer.observe(
+        successOverlay,
+        {
+            attributes: true,
+            attributeFilter: [
+                "class"
+            ]
+        }
+    );
+
+
+})();
+
+</script>
+
 
 </body>
 
