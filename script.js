@@ -87,6 +87,428 @@ let isCustom = false;
 
 
 /* =========================
+   ERROR POPUP
+========================= */
+
+/*
+ * Create error popup automatically.
+ * No changes are required in index.html.
+ */
+
+function showErrorPopup(
+    title,
+    message,
+    targetElement = null
+) {
+
+    /*
+     * Remove existing error popup
+     */
+
+    const oldPopup =
+        document.getElementById(
+            "validation-error-popup"
+        );
+
+    if (oldPopup) {
+        oldPopup.remove();
+    }
+
+
+    /*
+     * Overlay
+     */
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.id =
+        "validation-error-popup";
+
+
+    /*
+     * Popup box
+     */
+
+    const popup =
+        document.createElement("div");
+
+    popup.className =
+        "validation-error-box";
+
+
+    /*
+     * Error icon
+     */
+
+    const icon =
+        document.createElement("div");
+
+    icon.className =
+        "validation-error-icon";
+
+    icon.textContent =
+        "!";
+
+
+    /*
+     * Title
+     */
+
+    const titleElement =
+        document.createElement("h3");
+
+    titleElement.className =
+        "validation-error-title";
+
+    titleElement.textContent =
+        title;
+
+
+    /*
+     * Message
+     */
+
+    const messageElement =
+        document.createElement("p");
+
+    messageElement.className =
+        "validation-error-message";
+
+    messageElement.textContent =
+        message;
+
+
+    /*
+     * OK button
+     */
+
+    const button =
+        document.createElement("button");
+
+    button.type =
+        "button";
+
+    button.className =
+        "validation-error-button";
+
+    button.textContent =
+        "OK";
+
+
+    /*
+     * Put everything together
+     */
+
+    popup.appendChild(icon);
+
+    popup.appendChild(titleElement);
+
+    popup.appendChild(messageElement);
+
+    popup.appendChild(button);
+
+    overlay.appendChild(popup);
+
+    document.body.appendChild(overlay);
+
+
+    /*
+     * Show animation
+     */
+
+    requestAnimationFrame(
+        function () {
+
+            overlay.classList.add(
+                "show"
+            );
+
+        }
+    );
+
+
+    /*
+     * Close popup
+     */
+
+    function closeErrorPopup() {
+
+        overlay.classList.remove(
+            "show"
+        );
+
+        setTimeout(
+            function () {
+
+                if (overlay.parentNode) {
+
+                    overlay.parentNode.removeChild(
+                        overlay
+                    );
+
+                }
+
+            },
+            180
+        );
+
+    }
+
+
+    button.addEventListener(
+        "click",
+        closeErrorPopup
+    );
+
+
+    /*
+     * Click outside popup
+     */
+
+    overlay.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target === overlay
+            ) {
+
+                closeErrorPopup();
+
+            }
+
+        }
+    );
+
+
+    /*
+     * ESC key
+     */
+
+    function handleEscape(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeErrorPopup();
+
+            document.removeEventListener(
+                "keydown",
+                handleEscape
+            );
+
+        }
+
+    }
+
+    document.addEventListener(
+        "keydown",
+        handleEscape
+    );
+
+
+    /*
+     * Focus the required field
+     * after closing the popup.
+     */
+
+    if (targetElement) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                setTimeout(
+                    function () {
+
+                        targetElement.focus();
+
+                    },
+                    50
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================
+   VALIDATION POPUP STYLE
+========================= */
+
+/*
+ * The popup CSS is inserted
+ * automatically by JavaScript.
+ */
+
+if (
+    !document.getElementById(
+        "validation-popup-style"
+    )
+) {
+
+    const style =
+        document.createElement("style");
+
+    style.id =
+        "validation-popup-style";
+
+    style.textContent = `
+
+        #validation-error-popup {
+            position: fixed;
+            inset: 0;
+            z-index: 20000;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0, 0, 0, 0.42);
+
+            opacity: 0;
+
+            transition:
+                opacity 0.18s ease;
+        }
+
+
+        #validation-error-popup.show {
+            opacity: 1;
+        }
+
+
+        .validation-error-box {
+            width: 390px;
+            max-width: calc(100vw - 40px);
+
+            background: #ffffff;
+
+            border-radius: 14px;
+
+            padding:
+                30px 28px 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 15px 45px
+                rgba(0, 0, 0, 0.20);
+
+            transform:
+                scale(0.94);
+
+            transition:
+                transform 0.18s ease;
+        }
+
+
+        #validation-error-popup.show
+        .validation-error-box {
+            transform:
+                scale(1);
+        }
+
+
+        .validation-error-icon {
+            width: 58px;
+            height: 58px;
+
+            margin:
+                0 auto 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #fff1f2;
+
+            border:
+                3px solid #ff3040;
+
+            color: #ff3040;
+
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+
+        .validation-error-title {
+            margin:
+                0 0 10px;
+
+            color: #222222;
+
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+
+        .validation-error-message {
+            margin:
+                0 0 24px;
+
+            color: #666666;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+        }
+
+
+        .validation-error-button {
+            min-width: 78px;
+
+            padding:
+                11px 22px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #ff0050;
+
+            color: #ffffff;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s ease,
+                transform 0.15s ease;
+        }
+
+
+        .validation-error-button:hover {
+            background: #e90049;
+        }
+
+
+        .validation-error-button:active {
+            transform:
+                scale(0.97);
+        }
+
+    `;
+
+    document.head.appendChild(style);
+
+}
+
+
+/* =========================
    USERNAME VALIDATION
 ========================= */
 
@@ -425,6 +847,107 @@ function playSuccessAnimation() {
 
 
 /* =========================
+   RESET FOR NEXT REQUEST
+========================= */
+
+function resetForNextRequest() {
+
+    /*
+     * Clear username
+     */
+
+    usernameInput.value = "";
+
+
+    /*
+     * Clear username status
+     */
+
+    usernameStatus.textContent = "";
+
+    usernameStatus.className =
+        "username-status";
+
+
+    /*
+     * Remove selected coin
+     */
+
+    coinCards.forEach(
+        function (card) {
+
+            card.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    /*
+     * Reset coin values
+     */
+
+    selectedCoins = 0;
+
+    selectedPrice = 0;
+
+    isCustom = false;
+
+
+    /*
+     * Reset total
+     */
+
+    totalCoins.textContent =
+        "0";
+
+
+    /*
+     * Reset custom section
+     */
+
+    customSection.classList.add(
+        "hidden"
+    );
+
+
+    /*
+     * Reset custom input
+     */
+
+    customCoinsInput.value = "";
+
+    customPrice.textContent =
+        "$0.00";
+
+
+    /*
+     * Remove selected payment
+     */
+
+    paymentCards.forEach(
+        function (card) {
+
+            card.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    /*
+     * Reset payment
+
+     */
+
+    selectedPayment = "";
+
+}
+
+
+/* =========================
    CONFIRM
 ========================= */
 
@@ -448,15 +971,21 @@ confirmButton.addEventListener(
             /^[A-Za-z0-9_.]{4,30}$/;
 
 
+        /*
+         * =================================
+         * ERROR 1 — USERNAME
+         * =================================
+         */
+
         if (
-            !validUsername.test(username)
+            username.length === 0
         ) {
 
-            alert(
-                "Please enter a valid username."
+            showErrorPopup(
+                "Username Required",
+                "Please enter your TikTok username before continuing.",
+                usernameInput
             );
-
-            usernameInput.focus();
 
             return;
 
@@ -464,15 +993,37 @@ confirmButton.addEventListener(
 
 
         /*
-         * Coin validation
+         * Invalid username
+         */
+
+        if (
+            !validUsername.test(username)
+        ) {
+
+            showErrorPopup(
+                "Invalid Username",
+                "Please enter a valid username using 4–30 letters, numbers, underscores, or periods.",
+                usernameInput
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * =================================
+         * ERROR 2 — COIN PACKAGE
+         * =================================
          */
 
         if (
             selectedCoins <= 0
         ) {
 
-            alert(
-                "Please select a coin package."
+            showErrorPopup(
+                "Coin Package Required",
+                "Please select a coin package before continuing."
             );
 
             return;
@@ -481,15 +1032,18 @@ confirmButton.addEventListener(
 
 
         /*
-         * Payment validation
+         * =================================
+         * ERROR 3 — PAYMENT
+         * =================================
          */
 
         if (
             selectedPayment === ""
         ) {
 
-            alert(
-                "Please select a payment method."
+            showErrorPopup(
+                "Payment Method Required",
+                "Please select a payment method before continuing."
             );
 
             return;
@@ -540,8 +1094,7 @@ confirmButton.addEventListener(
 
 
                 /*
-                 * THIS FIXES
-                 * @username PROBLEM
+                 * Username
                  */
 
                 modalUsername.textContent =
@@ -559,7 +1112,6 @@ confirmButton.addEventListener(
 
                 /*
                  * Update payment
-
                  */
 
                 modalPayment.textContent =
@@ -598,23 +1150,35 @@ confirmButton.addEventListener(
 
 
 /* =========================
-   CLOSE MODAL
+   CLOSE SUCCESS MODAL
 ========================= */
 
 closeModal.addEventListener(
     "click",
     function () {
 
+        /*
+         * Hide successful popup
+         */
+
         successOverlay.classList.add(
             "hidden"
         );
+
+
+        /*
+         * Prepare a completely
+         * fresh request
+         */
+
+        resetForNextRequest();
 
     }
 );
 
 
 /* =========================
-   CLICK OUTSIDE MODAL
+   CLICK OUTSIDE SUCCESS MODAL
 ========================= */
 
 successOverlay.addEventListener(
@@ -625,9 +1189,20 @@ successOverlay.addEventListener(
             event.target === successOverlay
         ) {
 
+            /*
+             * Hide successful popup
+             */
+
             successOverlay.classList.add(
                 "hidden"
             );
+
+
+            /*
+             * Reset for next request
+             */
+
+            resetForNextRequest();
 
         }
 
