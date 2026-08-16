@@ -1051,28 +1051,26 @@ confirmButton.addEventListener(
         }
 
 
-        /*
-         * Disable button
-         */
+       /*
+ * Disable button
+ */
 
-        confirmButton.disabled = true;
-
-
-        /*
-         * Show loading
-         */
-
-        loadingOverlay.classList.remove(
-            "hidden"
-        );
+confirmButton.disabled = true;
 
 
-        /*
-         * Simulate processing
-         */
+/*
+ * Start Face ID style scanning
+ */
 
-        setTimeout(
-            function () {
+startFaceIDScan();
+
+
+/*
+ * Wait for the scan animation
+ */
+
+setTimeout(
+    function () {
 
                 /*
                  * Hide loading
