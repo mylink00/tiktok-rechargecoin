@@ -101,10 +101,6 @@ function showErrorPopup(
     targetElement = null
 ) {
 
-    /*
-     * Remove existing error popup
-     */
-
     const oldPopup =
         document.getElementById(
             "validation-error-popup"
@@ -115,10 +111,6 @@ function showErrorPopup(
     }
 
 
-    /*
-     * Overlay
-     */
-
     const overlay =
         document.createElement("div");
 
@@ -126,20 +118,12 @@ function showErrorPopup(
         "validation-error-popup";
 
 
-    /*
-     * Popup box
-     */
-
     const popup =
         document.createElement("div");
 
     popup.className =
         "validation-error-box";
 
-
-    /*
-     * Error icon
-     */
 
     const icon =
         document.createElement("div");
@@ -151,10 +135,6 @@ function showErrorPopup(
         "!";
 
 
-    /*
-     * Title
-     */
-
     const titleElement =
         document.createElement("h3");
 
@@ -165,10 +145,6 @@ function showErrorPopup(
         title;
 
 
-    /*
-     * Message
-     */
-
     const messageElement =
         document.createElement("p");
 
@@ -178,10 +154,6 @@ function showErrorPopup(
     messageElement.textContent =
         message;
 
-
-    /*
-     * OK button
-     */
 
     const button =
         document.createElement("button");
@@ -196,10 +168,6 @@ function showErrorPopup(
         "OK";
 
 
-    /*
-     * Put everything together
-     */
-
     popup.appendChild(icon);
 
     popup.appendChild(titleElement);
@@ -213,10 +181,6 @@ function showErrorPopup(
     document.body.appendChild(overlay);
 
 
-    /*
-     * Show animation
-     */
-
     requestAnimationFrame(
         function () {
 
@@ -227,10 +191,6 @@ function showErrorPopup(
         }
     );
 
-
-    /*
-     * Close popup
-     */
 
     function closeErrorPopup() {
 
@@ -262,10 +222,6 @@ function showErrorPopup(
     );
 
 
-    /*
-     * Click outside popup
-     */
-
     overlay.addEventListener(
         "click",
         function (event) {
@@ -281,10 +237,6 @@ function showErrorPopup(
         }
     );
 
-
-    /*
-     * ESC key
-     */
 
     function handleEscape(event) {
 
@@ -303,16 +255,12 @@ function showErrorPopup(
 
     }
 
+
     document.addEventListener(
         "keydown",
         handleEscape
     );
 
-
-    /*
-     * Focus the required field
-     * after closing the popup.
-     */
 
     if (targetElement) {
 
@@ -340,11 +288,6 @@ function showErrorPopup(
 /* =========================
    VALIDATION POPUP STYLE
 ========================= */
-
-/*
- * The popup CSS is inserted
- * automatically by JavaScript.
- */
 
 if (
     !document.getElementById(
@@ -508,6 +451,806 @@ if (
 }
 
 
+/* =========================================================
+   FACE ID SCANNER
+========================================================= */
+
+/*
+ * Face ID style scanner.
+ *
+ * This is only a visual simulation.
+ * It does NOT access the camera
+ * and does NOT scan a real face.
+ *
+ * The existing loading-overlay from
+ * index.html is reused.
+ */
+
+
+/* =========================
+   FACE ID STYLE
+========================= */
+
+if (
+    !document.getElementById(
+        "face-id-style"
+    )
+) {
+
+    const faceStyle =
+        document.createElement("style");
+
+    faceStyle.id =
+        "face-id-style";
+
+    faceStyle.textContent = `
+
+        .face-id-screen {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                rgba(255, 255, 255, 0.94);
+
+            color: #111111;
+
+            animation:
+                faceScreenIn
+                0.22s
+                ease-out;
+        }
+
+
+        @keyframes faceScreenIn {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+
+        .face-id-container {
+            width: 220px;
+            height: 220px;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /*
+         * Face outline
+         */
+
+        .face-id-face {
+            width: 130px;
+            height: 155px;
+
+            position: relative;
+
+            border:
+                3px solid #111111;
+
+            border-radius:
+                48% 48% 45% 45%;
+
+            opacity: 0.95;
+
+            animation:
+                facePulse
+                1.8s
+                ease-in-out;
+        }
+
+
+        @keyframes facePulse {
+
+            0% {
+                transform: scale(0.94);
+                opacity: 0.55;
+            }
+
+            35% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            70% {
+                transform: scale(1.02);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+        }
+
+
+        /*
+         * Eyes
+         */
+
+        .face-id-eyes {
+            position: absolute;
+
+            top: 56px;
+            left: 50%;
+
+            width: 72px;
+
+            transform:
+                translateX(-50%);
+
+            display: flex;
+
+            justify-content:
+                space-between;
+        }
+
+
+        .face-id-eye {
+            width: 10px;
+            height: 10px;
+
+            background:
+                #111111;
+
+            border-radius: 50%;
+        }
+
+
+        /*
+         * Nose
+         */
+
+        .face-id-nose {
+            position: absolute;
+
+            top: 78px;
+            left: 50%;
+
+            width: 3px;
+            height: 20px;
+
+            transform:
+                translateX(-50%);
+
+            background:
+                #111111;
+
+            border-radius: 3px;
+        }
+
+
+        /*
+         * Mouth
+         */
+
+        .face-id-mouth {
+            position: absolute;
+
+            left: 50%;
+            bottom: 28px;
+
+            width: 36px;
+            height: 16px;
+
+            transform:
+                translateX(-50%);
+
+            border-bottom:
+                3px solid #111111;
+
+            border-radius:
+                0 0 50% 50%;
+        }
+
+
+        /*
+         * Scanning line
+         */
+
+        .face-id-scan-line {
+            position: absolute;
+
+            left: 37px;
+            right: 37px;
+
+            height: 3px;
+
+            top: 28px;
+
+            background:
+                #007aff;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 0 8px
+                rgba(0, 122, 255, 0.65),
+
+                0 0 18px
+                rgba(0, 122, 255, 0.35);
+
+            animation:
+                faceScanLine
+                1.45s
+                ease-in-out
+                infinite;
+        }
+
+
+        @keyframes faceScanLine {
+
+            0% {
+                top: 32px;
+                opacity: 0;
+            }
+
+            12% {
+                opacity: 1;
+            }
+
+            50% {
+                top: 178px;
+                opacity: 1;
+            }
+
+            88% {
+                opacity: 1;
+            }
+
+            100% {
+                top: 32px;
+                opacity: 0;
+            }
+
+        }
+
+
+        /*
+         * Face ID corner brackets
+         */
+
+        .face-corner {
+            position: absolute;
+
+            width: 34px;
+            height: 34px;
+
+            border-color:
+                #111111;
+
+            border-style:
+                solid;
+
+            border-width:
+                0;
+        }
+
+
+        .face-corner.top-left {
+            top: 12px;
+            left: 12px;
+
+            border-top-width: 3px;
+            border-left-width: 3px;
+
+            border-radius:
+                8px 0 0 0;
+        }
+
+
+        .face-corner.top-right {
+            top: 12px;
+            right: 12px;
+
+            border-top-width: 3px;
+            border-right-width: 3px;
+
+            border-radius:
+                0 8px 0 0;
+        }
+
+
+        .face-corner.bottom-left {
+            bottom: 12px;
+            left: 12px;
+
+            border-bottom-width: 3px;
+            border-left-width: 3px;
+
+            border-radius:
+                0 0 0 8px;
+        }
+
+
+        .face-corner.bottom-right {
+            bottom: 12px;
+            right: 12px;
+
+            border-bottom-width: 3px;
+            border-right-width: 3px;
+
+            border-radius:
+                0 0 8px 0;
+        }
+
+
+        /*
+         * Text
+         */
+
+        .face-id-title {
+            margin-top: 8px;
+
+            font-size: 21px;
+
+            font-weight: 600;
+
+            color: #111111;
+
+            letter-spacing:
+                -0.2px;
+        }
+
+
+        .face-id-status {
+            margin-top: 8px;
+
+            font-size: 15px;
+
+            color: #777777;
+
+            transition:
+                color 0.2s ease;
+        }
+
+
+        /*
+         * Verified state
+         */
+
+        .face-id-screen.verified
+        .face-id-face {
+
+            border-color:
+                #16a34a;
+
+            animation:
+                faceVerified
+                0.35s
+                ease-out
+                forwards;
+        }
+
+
+        @keyframes faceVerified {
+
+            0% {
+                transform:
+                    scale(1);
+            }
+
+            50% {
+                transform:
+                    scale(1.07);
+            }
+
+            100% {
+                transform:
+                    scale(1);
+            }
+
+        }
+
+
+        .face-id-screen.verified
+        .face-id-eye,
+        .face-id-screen.verified
+        .face-id-nose,
+        .face-id-screen.verified
+        .face-id-mouth,
+        .face-id-screen.verified
+        .face-corner {
+
+            border-color:
+                #16a34a;
+
+            background-color:
+                #16a34a;
+        }
+
+
+        .face-id-screen.verified
+        .face-id-status {
+
+            color:
+                #16a34a;
+
+            font-weight:
+                600;
+        }
+
+
+        .face-id-screen.verified
+        .face-id-scan-line {
+
+            display:
+                none;
+        }
+
+
+        /*
+         * Mobile
+         */
+
+        @media (max-width: 600px) {
+
+            .face-id-container {
+                width: 190px;
+                height: 190px;
+            }
+
+
+            .face-id-face {
+                width: 112px;
+                height: 138px;
+            }
+
+
+            .face-id-eyes {
+                top: 50px;
+                width: 64px;
+            }
+
+
+            .face-id-nose {
+                top: 70px;
+            }
+
+
+            .face-id-mouth {
+                bottom: 25px;
+            }
+
+
+            .face-id-scan-line {
+                left: 30px;
+                right: 30px;
+            }
+
+        }
+
+    `;
+
+    document.head.appendChild(faceStyle);
+
+}
+
+
+/* =========================
+   FACE ID SCAN FUNCTION
+========================= */
+
+function startFaceIDScan() {
+
+    return new Promise(
+        function (resolve) {
+
+            /*
+             * Clear existing content
+             * inside loading overlay.
+             */
+
+            loadingOverlay.innerHTML = "";
+
+
+            /*
+             * Create Face ID screen
+             */
+
+            const screen =
+                document.createElement("div");
+
+            screen.className =
+                "face-id-screen";
+
+
+            /*
+             * Face ID container
+             */
+
+            const container =
+                document.createElement("div");
+
+            container.className =
+                "face-id-container";
+
+
+            /*
+             * Face outline
+             */
+
+            const face =
+                document.createElement("div");
+
+            face.className =
+                "face-id-face";
+
+
+            /*
+             * Eyes
+             */
+
+            const eyes =
+                document.createElement("div");
+
+            eyes.className =
+                "face-id-eyes";
+
+
+            const eyeLeft =
+                document.createElement("div");
+
+            eyeLeft.className =
+                "face-id-eye";
+
+
+            const eyeRight =
+                document.createElement("div");
+
+            eyeRight.className =
+                "face-id-eye";
+
+
+            eyes.appendChild(
+                eyeLeft
+            );
+
+            eyes.appendChild(
+                eyeRight
+            );
+
+
+            /*
+             * Nose
+             */
+
+            const nose =
+                document.createElement("div");
+
+            nose.className =
+                "face-id-nose";
+
+
+            /*
+             * Mouth
+             */
+
+            const mouth =
+                document.createElement("div");
+
+            mouth.className =
+                "face-id-mouth";
+
+
+            /*
+             * Scan line
+             */
+
+            const scanLine =
+                document.createElement("div");
+
+            scanLine.className =
+                "face-id-scan-line";
+
+
+            /*
+             * Corner brackets
+             */
+
+            const topLeft =
+                document.createElement("div");
+
+            topLeft.className =
+                "face-corner top-left";
+
+
+            const topRight =
+                document.createElement("div");
+
+            topRight.className =
+                "face-corner top-right";
+
+
+            const bottomLeft =
+                document.createElement("div");
+
+            bottomLeft.className =
+                "face-corner bottom-left";
+
+
+            const bottomRight =
+                document.createElement("div");
+
+            bottomRight.className =
+                "face-corner bottom-right";
+
+
+            /*
+             * Build face
+             */
+
+            face.appendChild(
+                eyes
+            );
+
+            face.appendChild(
+                nose
+            );
+
+            face.appendChild(
+                mouth
+            );
+
+
+            /*
+             * Build container
+             */
+
+            container.appendChild(
+                face
+            );
+
+            container.appendChild(
+                scanLine
+            );
+
+            container.appendChild(
+                topLeft
+            );
+
+            container.appendChild(
+                topRight
+            );
+
+            container.appendChild(
+                bottomLeft
+            );
+
+            container.appendChild(
+                bottomRight
+            );
+
+
+            /*
+             * Title
+             */
+
+            const title =
+                document.createElement("div");
+
+            title.className =
+                "face-id-title";
+
+            title.textContent =
+                "Face ID";
+
+
+            /*
+             * Status
+
+             */
+
+            const status =
+                document.createElement("div");
+
+            status.className =
+                "face-id-status";
+
+            status.textContent =
+                "Scanning...";
+
+
+            /*
+             * Build screen
+             */
+
+            screen.appendChild(
+                container
+            );
+
+            screen.appendChild(
+                title
+            );
+
+            screen.appendChild(
+                status
+            );
+
+
+            /*
+             * Put Face ID
+             * inside loading overlay
+             */
+
+            loadingOverlay.appendChild(
+                screen
+            );
+
+
+            /*
+             * Show scanner
+             */
+
+            loadingOverlay.classList.remove(
+                "hidden"
+            );
+
+
+            /*
+             * After scanning,
+             * show verified state.
+             */
+
+            setTimeout(
+                function () {
+
+                    screen.classList.add(
+                        "verified"
+                    );
+
+                    status.textContent =
+                        "Face ID Verified";
+
+                },
+                1350
+            );
+
+
+            /*
+             * Complete scan.
+             *
+             * Total time:
+             * approximately 1.8 seconds.
+             */
+
+            setTimeout(
+                function () {
+
+                    loadingOverlay.classList.add(
+                        "hidden"
+                    );
+
+                    resolve();
+
+                },
+                1800
+            );
+
+        }
+    );
+
+}
+
+
 /* =========================
    USERNAME VALIDATION
 ========================= */
@@ -530,15 +1273,6 @@ usernameInput.addEventListener(
             return;
         }
 
-
-        /*
-         * Username:
-         * a-z
-         * A-Z
-         * 0-9
-         * _
-         * .
-         */
 
         const validUsername =
             /^[A-Za-z0-9_.]{4,30}$/;
@@ -581,11 +1315,6 @@ coinCards.forEach(
             "click",
             function () {
 
-                /*
-                 * Remove selected state
-                 * from every coin card
-                 */
-
                 coinCards.forEach(
                     function (item) {
 
@@ -597,18 +1326,10 @@ coinCards.forEach(
                 );
 
 
-                /*
-                 * Select current card
-                 */
-
                 card.classList.add(
                     "selected"
                 );
 
-
-                /*
-                 * CUSTOM COIN
-                 */
 
                 if (
                     card === customCard
@@ -638,10 +1359,6 @@ coinCards.forEach(
 
                 }
 
-
-                /*
-                 * NORMAL COIN PACKAGE
-                 */
 
                 else {
 
@@ -698,10 +1415,6 @@ customCoinsInput.addEventListener(
             );
 
 
-        /*
-         * Invalid quantity
-         */
-
         if (
             !Number.isFinite(coins) ||
             coins <= 0
@@ -725,34 +1438,18 @@ customCoinsInput.addEventListener(
         }
 
 
-        /*
-         * Only whole coins
-         */
-
         selectedCoins =
             Math.floor(coins);
 
-
-        /*
-         * Prototype pricing
-         */
 
         selectedPrice =
             selectedCoins * 0.01247;
 
 
-        /*
-         * Display price
-         */
-
         customPrice.textContent =
             "$" +
             selectedPrice.toFixed(2);
 
-
-        /*
-         * Display total coins
-         */
 
         totalCoins.textContent =
             selectedCoins.toLocaleString(
@@ -774,10 +1471,6 @@ paymentCards.forEach(
             "click",
             function () {
 
-                /*
-                 * Remove previous selection
-                 */
-
                 paymentCards.forEach(
                     function (item) {
 
@@ -789,18 +1482,10 @@ paymentCards.forEach(
                 );
 
 
-                /*
-                 * Select current payment
-                 */
-
                 card.classList.add(
                     "selected"
                 );
 
-
-                /*
-                 * Save payment name
-                 */
 
                 selectedPayment =
                     card.dataset.payment;
@@ -818,26 +1503,13 @@ paymentCards.forEach(
 
 function playSuccessAnimation() {
 
-    /*
-     * Remove previous animation
-     */
-
     successIcon.classList.remove(
         "success-animate"
     );
 
 
-    /*
-     * Force browser to
-     * restart animation
-     */
-
     void successIcon.offsetWidth;
 
-
-    /*
-     * Start animation
-     */
 
     successIcon.classList.add(
         "success-animate"
@@ -852,26 +1524,14 @@ function playSuccessAnimation() {
 
 function resetForNextRequest() {
 
-    /*
-     * Clear username
-     */
-
     usernameInput.value = "";
 
-
-    /*
-     * Clear username status
-     */
 
     usernameStatus.textContent = "";
 
     usernameStatus.className =
         "username-status";
 
-
-    /*
-     * Remove selected coin
-     */
 
     coinCards.forEach(
         function (card) {
@@ -884,10 +1544,6 @@ function resetForNextRequest() {
     );
 
 
-    /*
-     * Reset coin values
-     */
-
     selectedCoins = 0;
 
     selectedPrice = 0;
@@ -895,36 +1551,20 @@ function resetForNextRequest() {
     isCustom = false;
 
 
-    /*
-     * Reset total
-     */
-
     totalCoins.textContent =
         "0";
 
-
-    /*
-     * Reset custom section
-     */
 
     customSection.classList.add(
         "hidden"
     );
 
 
-    /*
-     * Reset custom input
-     */
-
     customCoinsInput.value = "";
 
     customPrice.textContent =
         "$0.00";
 
-
-    /*
-     * Remove selected payment
-     */
 
     paymentCards.forEach(
         function (card) {
@@ -937,11 +1577,6 @@ function resetForNextRequest() {
     );
 
 
-    /*
-     * Reset payment
-
-     */
-
     selectedPayment = "";
 
 }
@@ -953,7 +1588,7 @@ function resetForNextRequest() {
 
 confirmButton.addEventListener(
     "click",
-    function () {
+    async function () {
 
         /*
          * Get username
@@ -972,9 +1607,7 @@ confirmButton.addEventListener(
 
 
         /*
-         * =================================
          * ERROR 1 — USERNAME
-         * =================================
          */
 
         if (
@@ -1012,9 +1645,7 @@ confirmButton.addEventListener(
 
 
         /*
-         * =================================
          * ERROR 2 — COIN PACKAGE
-         * =================================
          */
 
         if (
@@ -1032,9 +1663,7 @@ confirmButton.addEventListener(
 
 
         /*
-         * =================================
          * ERROR 3 — PAYMENT
-         * =================================
          */
 
         if (
@@ -1051,97 +1680,85 @@ confirmButton.addEventListener(
         }
 
 
-       /*
- * Disable button
- */
+        /*
+         * Disable Confirm
+         */
 
-confirmButton.disabled = true;
-
-
-/*
- * Start Face ID style scanning
- */
-
-startFaceIDScan();
+        confirmButton.disabled = true;
 
 
-/*
- * Wait for the scan animation
- */
+        /*
+         * =================================
+         * FACE ID SCAN
+         * =================================
+         *
+         * This replaces the old
+         * 1-second loading spinner.
+         */
 
-setTimeout(
-    function () {
-
-                /*
-                 * Hide loading
-                 */
-
-                loadingOverlay.classList.add(
-                    "hidden"
-                );
+        await startFaceIDScan();
 
 
-                /*
-                 * Update modal data
-                 */
+        /*
+         * =================================
+         * UPDATE SUCCESS MODAL
+         * =================================
+         */
 
-                modalCoins.textContent =
-                    selectedCoins.toLocaleString(
-                        "en-US"
-                    );
-
-
-                /*
-                 * Username
-                 */
-
-                modalUsername.textContent =
-                    "@" + username;
+        modalCoins.textContent =
+            selectedCoins.toLocaleString(
+                "en-US"
+            );
 
 
-                /*
-                 * Update price
-                 */
+        /*
+         * Username
+         */
 
-                modalPrice.textContent =
-                    "$" +
-                    selectedPrice.toFixed(2);
-
-
-                /*
-                 * Update payment
-                 */
-
-                modalPayment.textContent =
-                    selectedPayment;
+        modalUsername.textContent =
+            "@" + username;
 
 
-                /*
-                 * Show success modal
-                 */
+        /*
+         * Price
+         */
 
-                successOverlay.classList.remove(
-                    "hidden"
-                );
-
-
-                /*
-                 * Play animated
-                 * green check
-                 */
-
-                playSuccessAnimation();
+        modalPrice.textContent =
+            "$" +
+            selectedPrice.toFixed(2);
 
 
-                /*
-                 * Enable confirm button
-                 */
+        /*
+         * Payment
+         */
 
-                confirmButton.disabled = false;
+        modalPayment.textContent =
+            selectedPayment;
 
-            },
-            1000
+
+        /*
+         * =================================
+         * SHOW SUCCESS MODAL
+         * =================================
+         */
+
+        successOverlay.classList.remove(
+            "hidden"
         );
+
+
+        /*
+         * Play green check animation
+         */
+
+        playSuccessAnimation();
+
+
+        /*
+         * Enable Confirm again
+         */
+
+        confirmButton.disabled = false;
 
     }
 );
@@ -1155,19 +1772,10 @@ closeModal.addEventListener(
     "click",
     function () {
 
-        /*
-         * Hide successful popup
-         */
-
         successOverlay.classList.add(
             "hidden"
         );
 
-
-        /*
-         * Prepare a completely
-         * fresh request
-         */
 
         resetForNextRequest();
 
@@ -1187,18 +1795,10 @@ successOverlay.addEventListener(
             event.target === successOverlay
         ) {
 
-            /*
-             * Hide successful popup
-             */
-
             successOverlay.classList.add(
                 "hidden"
             );
 
-
-            /*
-             * Reset for next request
-             */
 
             resetForNextRequest();
 
