@@ -2,75 +2,523 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Get Coins</title>
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- =========================
-         SUCCESS CHECK ANIMATION
-    ========================== -->
+
+    <!-- =====================================================
+         FACE ID STYLE VERIFICATION
+         Visual animation only - NO CAMERA / NO FACE SCAN
+    ====================================================== -->
 
     <style>
 
-        .success-icon {
-            position: relative;
+        .faceid-overlay {
+            position: fixed;
+            inset: 0;
 
-            display: flex !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255, 255, 255, 0.94);
+
+            opacity: 1;
+
+            z-index: 10000;
+
+            transition:
+                opacity 0.25s ease;
+        }
+
+
+        .faceid-overlay.hidden {
+            display: none !important;
+        }
+
+
+        .faceid-container {
+            width: 260px;
+            height: 300px;
+
+            display: flex;
+            flex-direction: column;
 
             align-items: center;
             justify-content: center;
 
-            line-height: 1 !important;
+            position: relative;
         }
 
 
-        .success-icon .success-check {
-            width: 58px;
-            height: 58px;
+        /* =========================================
+           FACE ID ICON
+        ========================================= */
 
-            overflow: visible;
+        .faceid-frame {
+            width: 180px;
+            height: 180px;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
 
-        .success-icon .success-check-path {
-            fill: none;
+        /* Face outline */
 
-            stroke: #9bdd7a;
+        .face-outline {
+            width: 92px;
+            height: 120px;
 
-            stroke-width: 5;
+            border: 3px solid #111;
 
-            stroke-linecap: round;
+            border-radius:
+                48% 48%
+                45% 45%;
 
-            stroke-linejoin: round;
+            position: relative;
 
-            stroke-dasharray: 100;
+            opacity: 0;
 
-            stroke-dashoffset: 100;
-        }
-
-
-        .success-icon.animate .success-check-path {
+            transform: scale(0.92);
 
             animation:
-                drawSuccessCheck
-                0.75s
+                faceAppear
+                0.35s
                 ease-out
                 forwards;
+        }
+
+
+        /* Eyes */
+
+        .face-outline::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 12px;
+            height: 5px;
+
+            background: #111;
+
+            border-radius: 50%;
+
+            left: 20px;
+            top: 42px;
+
+            box-shadow:
+                40px 0 0 #111;
+        }
+
+
+        /* Mouth */
+
+        .face-outline::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 34px;
+            height: 14px;
+
+            border-bottom:
+                3px solid #111;
+
+            border-radius: 0 0 50% 50%;
+
+            left: 27px;
+            top: 78px;
+        }
+
+
+        @keyframes faceAppear {
+
+            from {
+                opacity: 0;
+                transform: scale(0.82);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
 
         }
 
 
-        @keyframes drawSuccessCheck {
+        /* =========================================
+           FACE ID CORNER MARKS
+        ========================================= */
+
+        .scan-corner {
+
+            position: absolute;
+
+            width: 30px;
+            height: 30px;
+
+            border-color: #111;
+
+            border-style: solid;
+
+            opacity: 0;
+
+            animation:
+                cornersAppear
+                0.3s
+                ease-out
+                0.2s
+                forwards;
+        }
+
+
+        .corner-top-left {
+
+            top: 18px;
+            left: 18px;
+
+            border-width:
+                3px 0 0 3px;
+
+        }
+
+
+        .corner-top-right {
+
+            top: 18px;
+            right: 18px;
+
+            border-width:
+                3px 3px 0 0;
+
+        }
+
+
+        .corner-bottom-left {
+
+            bottom: 18px;
+            left: 18px;
+
+            border-width:
+                0 0 3px 3px;
+
+        }
+
+
+        .corner-bottom-right {
+
+            bottom: 18px;
+            right: 18px;
+
+            border-width:
+                0 3px 3px 0;
+
+        }
+
+
+        @keyframes cornersAppear {
+
+            from {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+
+
+        /* =========================================
+           SCANNING LINE
+        ========================================= */
+
+        .faceid-scan-line {
+
+            position: absolute;
+
+            left: 28px;
+            right: 28px;
+
+            height: 3px;
+
+            background: #111;
+
+            box-shadow:
+                0 0 8px rgba(0, 0, 0, 0.25);
+
+            top: 20px;
+
+            opacity: 0;
+
+            animation:
+                faceScan
+                0.85s
+                ease-in-out
+                0.2s
+                forwards;
+        }
+
+
+        @keyframes faceScan {
 
             0% {
-                stroke-dashoffset: 100;
+
+                opacity: 0;
+
+                top: 25px;
+
+            }
+
+            10% {
+
+                opacity: 1;
+
+            }
+
+            50% {
+
+                opacity: 1;
+
+            }
+
+            90% {
+
+                opacity: 1;
+
             }
 
             100% {
-                stroke-dashoffset: 0;
+
+                opacity: 0;
+
+                top: 155px;
+
+            }
+
+        }
+
+
+        /* =========================================
+           FACE ID TEXT
+        ========================================= */
+
+        .faceid-title {
+
+            margin-top: 15px;
+
+            font-size: 19px;
+
+            font-weight: 600;
+
+            color: #111;
+
+            opacity: 0;
+
+            animation:
+                textAppear
+                0.35s
+                ease-out
+                0.15s
+                forwards;
+        }
+
+
+        .faceid-status {
+
+            margin-top: 7px;
+
+            font-size: 14px;
+
+            color: #777;
+
+            opacity: 0;
+
+            animation:
+                textAppear
+                0.35s
+                ease-out
+                0.25s
+                forwards;
+        }
+
+
+        @keyframes textAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =========================================
+           VERIFIED
+        ========================================= */
+
+        .faceid-verified {
+
+            position: absolute;
+
+            width: 78px;
+            height: 78px;
+
+            border-radius: 50%;
+
+            background: #111;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            opacity: 0;
+
+            transform: scale(0.5);
+
+            z-index: 5;
+        }
+
+
+        .faceid-verified-check {
+
+            color: white;
+
+            font-size: 42px;
+
+            line-height: 1;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .faceid-overlay.verified
+        .faceid-frame {
+
+            animation:
+                verifiedPulse
+                0.35s
+                ease-out
+                forwards;
+        }
+
+
+        .faceid-overlay.verified
+        .faceid-verified {
+
+            animation:
+                verifiedAppear
+                0.35s
+                ease-out
+                forwards;
+        }
+
+
+        .faceid-overlay.verified
+        .face-outline {
+
+            opacity: 0.12;
+        }
+
+
+        .faceid-overlay.verified
+        .faceid-title {
+
+            opacity: 0;
+
+        }
+
+
+        .faceid-overlay.verified
+        .faceid-status {
+
+            color: #111;
+
+            font-weight: 600;
+
+        }
+
+
+        .faceid-overlay.verified
+        .faceid-status::after {
+
+            content: "Verified";
+
+        }
+
+
+        .faceid-overlay.verified
+        .faceid-status {
+
+            font-size: 0;
+
+        }
+
+
+        .faceid-overlay.verified
+        .faceid-status::after {
+
+            font-size: 14px;
+
+        }
+
+
+        @keyframes verifiedPulse {
+
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+
+
+        @keyframes verifiedAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform: scale(0.5);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: scale(1);
+
             }
 
         }
@@ -89,18 +537,22 @@
     <section class="card">
 
 
-        <h1>Get Coins</h1>
+        <h1>
+            Get Coins
+        </h1>
 
 
         <p class="subtitle">
-            Save about 25% on service fees from third-party providers.
+
+            Save about 25% on service fees
+            from third-party providers.
+
         </p>
 
 
-        <!-- =========================
+        <!-- =================================================
              USERNAME
-        ========================== -->
-
+        ================================================== -->
 
         <div class="username-box">
 
@@ -123,26 +575,21 @@
 
             <span
                 id="username-status"
-                class="username-status">
-            </span>
+                class="username-status"
+            ></span>
 
 
         </div>
 
 
-
-        <!-- =========================
+        <!-- =================================================
              COIN PACKAGES
-        ========================== -->
-
+        ================================================== -->
 
         <div
             class="coin-grid"
             id="coin-grid"
         >
-
-
-            <!-- 30 COINS -->
 
 
             <button
@@ -152,25 +599,21 @@
                 data-price="0.38"
             >
 
-
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+                <strong>
+                    30
+                </strong>
 
-                <strong>30</strong>
-
-
-                <span>$0.38</span>
-
+                <span>
+                    $0.38
+                </span>
 
             </button>
-
-
-
-            <!-- 350 COINS -->
 
 
             <button
@@ -180,25 +623,21 @@
                 data-price="4.36"
             >
 
-
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+                <strong>
+                    350
+                </strong>
 
-                <strong>350</strong>
-
-
-                <span>$4.36</span>
-
+                <span>
+                    $4.36
+                </span>
 
             </button>
-
-
-
-            <!-- 700 COINS -->
 
 
             <button
@@ -208,25 +647,21 @@
                 data-price="8.73"
             >
 
-
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+                <strong>
+                    700
+                </strong>
 
-                <strong>700</strong>
-
-
-                <span>$8.73</span>
-
+                <span>
+                    $8.73
+                </span>
 
             </button>
-
-
-
-            <!-- 1,400 COINS -->
 
 
             <button
@@ -236,25 +671,21 @@
                 data-price="17.45"
             >
 
-
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+                <strong>
+                    1,400
+                </strong>
 
-                <strong>1,400</strong>
-
-
-                <span>$17.45</span>
-
+                <span>
+                    $17.45
+                </span>
 
             </button>
-
-
-
-            <!-- 3,500 COINS -->
 
 
             <button
@@ -264,25 +695,21 @@
                 data-price="43.63"
             >
 
-
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+                <strong>
+                    3,500
+                </strong>
 
-                <strong>3,500</strong>
-
-
-                <span>$43.63</span>
-
+                <span>
+                    $43.63
+                </span>
 
             </button>
-
-
-
-            <!-- 7,000 COINS -->
 
 
             <button
@@ -292,25 +719,21 @@
                 data-price="87.27"
             >
 
-
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+                <strong>
+                    7,000
+                </strong>
 
-                <strong>7,000</strong>
-
-
-                <span>$87.27</span>
-
+                <span>
+                    $87.27
+                </span>
 
             </button>
-
-
-
-            <!-- 17,500 COINS -->
 
 
             <button
@@ -320,26 +743,24 @@
                 data-price="218.17"
             >
 
-
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
+                <strong>
+                    17,500
+                </strong>
 
-                <strong>17,500</strong>
-
-
-                <span>$218.17</span>
-
+                <span>
+                    $218.17
+                </span>
 
             </button>
 
 
-
             <!-- CUSTOM -->
-
 
             <button
                 type="button"
@@ -347,21 +768,19 @@
                 id="custom-card"
             >
 
-
                 <img
                     src="assets/tiktok-coin.png"
                     alt=""
                     class="coin-logo"
                 >
 
-
-                <strong>Custom</strong>
-
+                <strong>
+                    Custom
+                </strong>
 
                 <span>
                     Support large quantities
                 </span>
-
 
             </button>
 
@@ -369,17 +788,14 @@
         </div>
 
 
-
-        <!-- =========================
+        <!-- =================================================
              CUSTOM COIN
-        ========================== -->
-
+        ================================================== -->
 
         <div
             id="custom-section"
             class="custom-section hidden"
         >
-
 
             <label for="custom-coins">
                 Enter coin quantity
@@ -399,33 +815,25 @@
                 class="custom-price"
                 id="custom-price"
             >
-
                 $0.00
-
             </div>
-
 
         </div>
 
 
-
-        <!-- =========================
+        <!-- =================================================
              PAYMENT
-        ========================== -->
-
+        ================================================== -->
 
         <h2>
             Select Payment Method
         </h2>
 
 
-
         <div class="payment-grid">
 
 
-
             <!-- VISA -->
-
 
             <button
                 type="button"
@@ -434,19 +842,15 @@
                 aria-label="Visa"
             >
 
-
                 <img
                     src="assets/visa.png"
                     alt="Visa"
                 >
 
-
             </button>
 
 
-
             <!-- MASTERCARD -->
-
 
             <button
                 type="button"
@@ -455,19 +859,15 @@
                 aria-label="MasterCard"
             >
 
-
                 <img
                     src="assets/mastercard.png"
                     alt="MasterCard"
                 >
 
-
             </button>
 
 
-
             <!-- PAYPAL -->
-
 
             <button
                 type="button"
@@ -476,19 +876,15 @@
                 aria-label="PayPal"
             >
 
-
                 <img
                     src="assets/paypal.png"
                     alt="PayPal"
                 >
 
-
             </button>
 
 
-
             <!-- JCB -->
-
 
             <button
                 type="button"
@@ -497,12 +893,10 @@
                 aria-label="JCB"
             >
 
-
                 <img
                     src="assets/jcb.png"
                     alt="JCB"
                 >
-
 
             </button>
 
@@ -510,31 +904,24 @@
         </div>
 
 
-
-        <!-- =========================
+        <!-- =================================================
              BOTTOM
-        ========================== -->
-
+        ================================================== -->
 
         <div class="bottom-area">
 
 
             <div class="total">
 
-
                 Total:
-
 
                 <span id="total-coins">
                     0
                 </span>
 
-
                 coins
 
-
             </div>
-
 
 
             <button
@@ -558,28 +945,107 @@
 
 
 
-<!-- =========================
-     LOADING
-========================== -->
-
+<!-- =========================================================
+     FACE ID VERIFICATION OVERLAY
+========================================================== -->
 
 <div
-    id="loading-overlay"
-    class="loading-overlay hidden"
+    id="faceid-overlay"
+    class="faceid-overlay hidden"
 >
 
 
-    <div class="loader"></div>
+    <div class="faceid-container">
+
+
+        <div class="faceid-frame">
+
+
+            <div
+                class="scan-corner corner-top-left"
+            ></div>
+
+
+            <div
+                class="scan-corner corner-top-right"
+            ></div>
+
+
+            <div
+                class="scan-corner corner-bottom-left"
+            ></div>
+
+
+            <div
+                class="scan-corner corner-bottom-right"
+            ></div>
+
+
+            <div
+                class="face-outline"
+            ></div>
+
+
+            <div
+                class="faceid-scan-line"
+            ></div>
+
+
+            <div
+                class="faceid-verified"
+            >
+
+                <span
+                    class="faceid-verified-check"
+                >
+                    ✓
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="faceid-title">
+            Face ID
+        </div>
+
+
+        <div class="faceid-status">
+            Scanning...
+        </div>
+
+
+    </div>
 
 
 </div>
 
 
 
-<!-- =========================
-     SUCCESS MODAL
-========================== -->
+<!-- =========================================================
+     OLD LOADING OVERLAY
+     
+     Kept in the HTML so the existing script does not
+     immediately break. The next script modification will
+     replace this with the Face ID flow.
+========================================================== -->
 
+<div
+    id="loading-overlay"
+    class="loading-overlay hidden"
+>
+
+    <div class="loader"></div>
+
+</div>
+
+
+
+<!-- =========================================================
+     SUCCESS MODAL
+========================================================== -->
 
 <div
     id="success-overlay"
@@ -590,11 +1056,7 @@
     <div class="success-modal">
 
 
-
-        <!-- =========================
-             ANIMATED SUCCESS CHECK
-        ========================== -->
-
+        <!-- SUCCESS CHECK -->
 
         <div
             id="success-icon"
@@ -602,31 +1064,23 @@
             aria-hidden="true"
         >
 
-
             <svg
                 class="success-check"
                 viewBox="0 0 64 64"
                 aria-hidden="true"
             >
 
-
                 <path
                     class="success-check-path"
                     d="M14 34 L27 47 L51 17"
                 ></path>
 
-
             </svg>
-
 
         </div>
 
 
-
-        <!-- =========================
-             SUCCESS TITLE
-        ========================== -->
-
+        <!-- TITLE -->
 
         <h2 class="success-title">
 
@@ -635,95 +1089,62 @@
         </h2>
 
 
-
-        <!-- =========================
-             SUCCESS MESSAGE
-        ========================== -->
-
+        <!-- MESSAGE -->
 
         <p class="success-message">
 
-
             You have successfully requested
-
 
             <strong id="modal-coins">
                 0
             </strong>
 
-
             coins for
-
 
             <strong id="modal-username">
                 @
             </strong>.
 
-
         </p>
 
 
-
-        <!-- =========================
-             AMOUNT
-        ========================== -->
-
+        <!-- AMOUNT -->
 
         <p class="success-info">
 
-
             💳 Amount:
-
 
             <strong id="modal-price">
                 $0.00
             </strong>
 
-
         </p>
 
 
-
-        <!-- =========================
-             PAYMENT
-        ========================== -->
-
+        <!-- PAYMENT -->
 
         <p class="success-info">
 
-
             💳 Payment Method:
-
 
             <strong id="modal-payment">
                 -
             </strong>
 
-
         </p>
 
 
-
-        <!-- =========================
-             PROCESSING
-        ========================== -->
-
+        <!-- PROCESSING -->
 
         <p class="processing-text">
 
-
-            ⏳ Please wait about 24–48 hours for the system to
-            process your transaction.
-
+            ⏳ Please wait about 24–48 hours
+            for the system to process your transaction.
 
         </p>
 
 
-
-        <!-- =========================
-             OK
-        ========================== -->
-
+        <!-- OK -->
 
         <button
             type="button"
@@ -738,26 +1159,21 @@
 
     </div>
 
-
 </div>
 
 
 
-<!-- =========================
+<!-- =========================================================
      MAIN JAVASCRIPT
-========================== -->
-
+========================================================== -->
 
 <script src="script.js"></script>
 
 
 
-<!-- =========================
-     TRIGGER SUCCESS CHECK
-     ANIMATION EACH TIME
-     MODAL OPENS
-========================== -->
-
+<!-- =========================================================
+     SUCCESS CHECK ANIMATION
+========================================================== -->
 
 <script>
 
@@ -786,40 +1202,22 @@
     }
 
 
-
     function playSuccessAnimation() {
 
-
-        /*
-         * Remove the animation first.
-         * This makes sure the animation
-         * can play again every time.
-         */
 
         successIcon.classList.remove(
             "animate"
         );
 
 
-        /*
-         * Force browser reflow.
-         * Without this, the browser may
-         * reuse the previous animation.
-         */
-
         void successIcon.offsetWidth;
 
-
-        /*
-         * Start animation.
-         */
 
         successIcon.classList.add(
             "animate"
         );
 
     }
-
 
 
     const observer =
@@ -833,10 +1231,10 @@
 
                         if (
                             mutation.type ===
-                                "attributes" &&
+                            "attributes" &&
 
                             mutation.attributeName ===
-                                "class" &&
+                            "class" &&
 
                             !successOverlay.classList.contains(
                                 "hidden"
@@ -846,17 +1244,13 @@
 
                             playSuccessAnimation();
 
-
                         }
-
 
                     }
                 );
 
-
             }
         );
-
 
 
     observer.observe(
